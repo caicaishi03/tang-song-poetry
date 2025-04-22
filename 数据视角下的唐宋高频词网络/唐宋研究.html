@@ -1,0 +1,1335 @@
+<!doctype html>
+
+<meta charset="utf-8">
+<title>高频词深度解析</title>
+<link href="../css/style.css" rel="stylesheet" type="text/css" media="all" />
+<script src="../js/echarts.min.js" charset="utf-8"></script>
+<script src="../js/china.js"></script>
+<script src="../js/高频词分析.js"></script>
+
+<body>
+  <div class="bnt">
+    <h1 class="tith1 fl">高频词深度解析</h1>
+  </div>
+
+  <!-- bnt end -->
+  <div class="left1 pleft1">
+    <div class="lefttime">
+      <h2 class="tith2">专题分类</h2>
+      <div class="lefttime_text">
+        <ul>
+          <li class="bg active">唐宋研究</li>
+          <li></li>
+          <a href="./唐朝.html">
+            <li class="bg">唐朝</li>
+          </a>
+          <li></li>
+          <a href="./宋朝.html">
+            <li class="bg">宋朝</li>
+          </a>
+          <li></li>
+          <!-- <li class="bg">本季</li> -->
+          <li></li>
+          <!-- <li class="bg">本年</li> -->
+        </ul>
+      </div>
+    </div>
+    <div class="plefttoday">
+      <h2 class="tith2">今日活动统计</h2>
+      <div class="lefttoday_tit" style=" height:8%">
+        <p class="fl">时期：唐宋</p>
+        <p class="fr">2025-03-12</p>
+      </div>
+      <div class="lefttoday_number">
+        <div class="widget-inline-box text-center fl">
+          <p>宋朝"人"出现次数</p>
+          <h3 class="ceeb1fd">13247</h3>
+          <h4 class="text-muted">较唐朝<img src="../img/icondown.png" height="16" />46.18%</h4>
+        </div>
+        <div class="widget-inline-box text-center fl">
+          <p>宋朝"云"出现次数</p>
+          <h3 class="c24c9ff">7597</h3>
+          <h4 class="text-muted">较唐朝<img src="../img/icondown.png" height="16" />46.54%</h4>
+        </div>
+        <div class="widget-inline-box text-center fl">
+          <p>宋朝"山"出现次数</p>
+          <h3 class="cffff00">6708</h3>
+          <h4 class="text-muted">较唐朝<img src="../img/icondown.png" height="16" />63.32%</h4>
+        </div>
+        <div class="widget-inline-box text-center fl">
+          <p>宋朝"春"出现次数</p>
+          <h3 class="c11e2dd">9965</h3>
+          <h4 class="text-muted">较唐朝<img src="../img/icondown.png" height="16" />15.94%</h4>
+        </div>
+      </div>
+      <!-- lefttoday_number end -->
+      <!--  lefttoday_bar end-->
+    </div>
+    <div class="lpeftmidbot">
+      <h2 class="tith2">唐诗中颜色占比</h2>
+      <div id="lpeftbot" class="lpeftmidbotcont"></div>
+    </div>
+    <div class="lpeftbot">
+      <h2 class="tith2">苏轼作词时间折线图</h2>
+      <div id="lpeftmidbot" class="lpeftbotcont"></div>
+    </div>
+  </div>
+  <!--  left1 end -->
+  <div class="left2">
+    <div class="pleftbox2top">
+      <h2 class="tith2">高频词类别分析</h2>
+      <div id="pleftbox2top" class="pleftbox2topcont"></div>
+    </div>
+    <div class="pleftbox2midd">
+      <h2 class="tith2">全唐诗中常见字排名</h2>
+      <!-- <div id="pleftbox2midd" class="pleftbox2middcont"></div> -->
+      <div class="pvr fl  lpeftb2otcont1 hdtop" style=" height:82%;">
+        <ul>
+          <li class="hot1">1</li>
+          <li class="hot2">2</li>
+          <li class="hot3">3</li>
+          <li class="hot4">4</li>
+          <li class="hot5">5</li>
+        </ul>
+        <div id="pleftbox2bott_cont" class="pleftbox2middcont" style=" height:100%;"></div>
+      </div>
+    </div>
+    <div class="lpeft2bot">
+      <h2 class="tith2 ">全唐诗中排名前五的地名</h2>
+      <div id="prbottom_box1" class="lpeftb2otcont"></div>
+
+    </div>
+  </div>
+  </div>
+  <div class="mrbox prbox">
+    <!-- 新增导航栏代码 -->
+    <div class="top-nav-container" style="position: relative;">
+      <div class="top-nav" style="position: absolute;right: 20px;top: -50px;z-index: 1000;">
+        <ul class="nav-list">
+          <li class="nav-item"><a href="./主页面.html" class="nav-link">首页</a></li>
+          <li class="nav-item"><a href="./诗人社会网络.html" class="nav-link">诗人社会网络</a></li>
+          <li class="nav-item"><a href="./诗词数据库.html" class="nav-link">诗词数据库</a></li>
+          <li class="nav-item"><a href="./诗路探源.html" class="nav-link">诗路探源</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="hdmrbox_top">
+      <div class="mrbox_top_midd">
+        <div class="hdmrboxtm-mbox">
+          <h2 class="tith2 pt1">地图分析</h2>
+          <div class="mrboxtm-map hdmrboxtm-map">
+            <!-- 地图容器 -->
+            <div id="china_map" style="
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 120%;
+  z-index: 1;
+"></div>
+
+            <script>
+              // 确保地图容器在页面加载完成后可见
+              document.addEventListener('DOMContentLoaded', function() {
+                const mapContainer = document.getElementById('china_map');
+                if (mapContainer) {
+                  // 强制设置可见性
+                  mapContainer.style.display = 'block';
+                  mapContainer.style.visibility = 'visible';
+                  mapContainer.style.opacity = '1';
+                }
+              });
+              
+              // 省级文学数据（示例）
+              const provinceData = {
+                "北京市": { "诗": 227, "词": 11, "赋": 0, "文": 43 },
+                "天津市": { "诗": 20, "词": 0, "赋": 0, "文": 1 },
+                "河北省": { "诗": 959, "词": 6, "赋": 1, "文": 307 },
+                "山西省": { "诗": 560, "词": 0, "赋": 3, "文": 301 },
+                "内蒙古自治区": { "诗": 46, "词": 0, "赋": 0, "文": 30 },
+                "辽宁省": { "诗": 6, "词": 0, "赋": 0, "文": 0 },
+                "黑龙江省": { "诗": 0, "词": 0, "赋": 0, "文": 1 },
+                "上海市": { "诗": 15, "词": 5, "赋": 0, "文": 2 },
+                "江苏省": { "诗": 6638, "词": 407, "赋": 20, "文": 2088 },
+                "浙江省": { "诗": 6753, "词": 507, "赋": 17, "文": 7011 },
+                "安徽省": { "诗": 2464, "词": 84, "赋": 13, "文": 1238 },
+                "福建省": { "诗": 4511, "词": 154, "赋": 14, "文": 2231 },
+                "江西省": { "诗": 4500, "词": 179, "赋": 14, "文": 3114 },
+                "山东省": { "诗": 679, "词": 44, "赋": 3, "文": 303 },
+                "河南省": { "诗": 11185, "词": 197, "赋": 60, "文": 8431 },
+                "湖北省": { "诗": 2725, "词": 146, "赋": 20, "文": 1438 },
+                "湖南省": { "诗": 1713, "词": 67, "赋": 3, "文": 1252 },
+                "广东省": { "诗": 1248, "词": 63, "赋": 5, "文": 1077 },
+                "广西壮族自治区": { "诗": 491, "词": 18, "赋": 2, "文": 659 },
+                "海南省": { "诗": 93, "词": 4, "赋": 1, "文": 22 },
+                "重庆市": { "诗": 915, "词": 44, "赋": 3, "文": 110 },
+                "四川省": { "诗": 1868, "词": 85, "赋": 12, "文": 667 },
+                "贵州省": { "诗": 103, "词": 0, "赋": 0, "文": 2 },
+                "云南省": { "诗": 2, "词": 0, "赋": 0, "文": 3 },
+                "陕西省": { "诗": 4502, "词": 31, "赋": 25, "文": 3000 },
+                "甘肃省": { "诗": 246, "词": 1, "赋": 1, "文": 206 },
+                "青海省": { "诗": 1, "词": 0, "赋": 0, "文": 1 },
+                "宁夏回族自治区": { "诗": 3, "词": 0, "赋": 0, "文": 1 },
+                "新疆维吾尔自治区": { "诗": 49, "词": 0, "赋": 0, "文": 0 },
+                "台湾省": { "诗": 0, "词": 0, "赋": 0, "文": 0 },
+                "南海诸岛": { "诗": 0, "词": 0, "赋": 0, "文": 0 },
+                "蒙古": { "诗": 1, "词": 0, "赋": 0, "文": 0 },
+                "越南": { "诗": 4, "词": 0, "赋": 0, "文": 0 },
+                "吉林省": { "诗": 0, "词": 0, "赋": 0, "文": 0 },
+                "西藏自治区": { "诗": 0, "词": 0, "赋": 0, "文": 0 },
+                "香港特别行政区": { "诗": 0, "词": 0, "赋": 0, "文": 0 },
+                "澳门特别行政区": { "诗": 0, "词": 0, "赋": 0, "文": 0 }
+              };
+
+
+
+              // 省份颜色映射表
+              const provinceColors = {
+                "北京市": "#909192",
+                "天津市": "#909192",
+                "河北省": "#a6bfef",
+                "山西省": "#9fa5b0",
+                "内蒙古自治区": "#909192",
+                "辽宁省": "#909192",
+                "黑龙江省": "#909192",
+                "上海市": "#909192",
+                "江苏省": "#1a76d2",
+                "浙江省": "#0f70d2",
+                "安徽省": "#6581b6",
+                "福建省": "#3176f5",
+                "江西省": "#5b8ff0",
+                "山东省": "#9aa5b8",
+                "河南省": "#0059fd",
+                "湖北省": "#77a2f1",
+                "湖南省": "#5a6d90",
+                "广东省": "#94b3ec",
+                "广西壮族自治区": "#babdc2",
+                "海南省": "#909192",
+                "重庆市": "#bbcdee",
+                "四川省": "#4d628a",
+                "贵州省": "#909192",
+                "云南省": "#909192",
+                "陕西省": "#4682f0",
+                "甘肃省": "#909192",
+                "青海省": "#909192",
+                "宁夏回族自治区": "#909192",
+                "新疆维吾尔自治区": "#909192",
+                "台湾省": "#bebada",
+                "南海诸岛": "#fb8072",
+                "蒙古": "#909192",
+                "越南": "#909192"
+              };
+
+              // 地图初始化
+              (function initMap() {
+                // 使用ECharts内置的中国地图数据
+                const chartDom = document.getElementById('china_map');
+                const myChart = echarts.init(chartDom);
+                
+                // 转换数据格式，处理省份名称差异
+                const formattedData = [];
+                const provinceMapping = {
+                  '北京': '北京市',
+                  '天津': '天津市',
+                  '河北': '河北省',
+                  '山西': '山西省',
+                  '内蒙古': '内蒙古自治区',
+                  '辽宁': '辽宁省',
+                  '吉林': '吉林省',
+                  '黑龙江': '黑龙江省',
+                  '上海': '上海市',
+                  '江苏': '江苏省',
+                  '浙江': '浙江省',
+                  '安徽': '安徽省',
+                  '福建': '福建省',
+                  '江西': '江西省',
+                  '山东': '山东省',
+                  '河南': '河南省',
+                  '湖北': '湖北省',
+                  '湖南': '湖南省',
+                  '广东': '广东省',
+                  '广西': '广西壮族自治区',
+                  '海南': '海南省',
+                  '重庆': '重庆市',
+                  '四川': '四川省',
+                  '贵州': '贵州省',
+                  '云南': '云南省',
+                  '西藏': '西藏自治区',
+                  '陕西': '陕西省',
+                  '甘肃': '甘肃省',
+                  '青海': '青海省',
+                  '宁夏': '宁夏回族自治区',
+                  '新疆': '新疆维吾尔自治区',
+                  '台湾': '台湾省',
+                  '香港': '香港特别行政区',
+                  '澳门': '澳门特别行政区'
+                };
+                
+                // 处理每个省份的数据
+                for (const [key, value] of Object.entries(provinceData)) {
+                  let name = key;
+                  // 查找简称映射
+                  for (const [shortName, fullName] of Object.entries(provinceMapping)) {
+                    if (key === fullName) {
+                      name = shortName;
+                      break;
+                    }
+                  }
+                  
+                  formattedData.push({
+                    name: name,
+                    value: value.诗 + value.词 + value.赋 + value.文,
+                    itemStyle: {
+                      color: provinceColors[key] || '#ccc'
+                    },
+                    ...value  // 保留原始数据
+                  });
+                }
+                
+                // 计算最大数值
+                const maxValue = Math.max(...formattedData.map(item => item.value));
+
+                const option = {
+                  backgroundColor: 'rgba(255, 255, 255, 0.8)',
+                  visualMap: {
+                    type: 'piecewise',
+                    left: 'right',
+                    min: 0,
+                    max: maxValue,
+                    calculable: true,
+                    inRange: {
+                      color: ['#f7fbff', '#6baed6', '#3182bd', '#08519c', '#08306b']
+                    },
+                    pieces: [
+                      { min: 0, max: 999, label: '0-999' },
+                      { min: 1000, max: 4999, label: '1000-4999' },
+                      { min: 5000, max: 9999, label: '5000-9999' },
+                      { min: 10000, max: 19999, label: '10000-19999' },
+                      { min: 20000, label: '20000+' }
+                    ],
+                    textStyle: { color: '#333' }
+                  },
+                  tooltip: {
+                    trigger: 'item',
+                    formatter: params => {
+                      // 获取原始数据
+                      const data = params.data || {};
+                      return `
+                          <b>${params.name}</b><br>
+                          诗文总数：${data.诗 + data.词 + data.赋 + data.文 || 0}篇<br>
+                          诗歌：${data.诗 || 0}篇<br>
+                          词作：${data.词 || 0}首<br>
+                          辞赋：${data.赋 || 0}篇<br>
+                          文章：${data.文 || 0}篇
+                      `;
+                    }
+                  },
+                  series: [{
+                    name: '唐宋作品分布',
+                    type: 'map',
+                    map: 'china',
+                    zoom: 1.2,
+                    center: [104.0, 36.0],
+                    roam: true,
+                    emphasis: {
+                      label: {
+                        show: true
+                      },
+                      itemStyle: {
+                        areaColor: '#08306b'
+                      }
+                    },
+                    data: formattedData,
+                    itemStyle: {
+                      borderColor: '#404a59',
+                      borderWidth: 0.5
+                    },
+                    label: {
+                      show: false
+                    }
+                  }]
+                };
+                
+                // 应用配置
+                myChart.setOption(option);
+                
+                // 添加窗口大小变化响应
+                window.addEventListener('resize', function() {
+                  myChart.resize();
+                });
+                
+                console.log('地图初始化完成 - 使用内置中国地图');
+              })();
+            </script>
+
+          </div>
+          <div class="map-credits" style="position: absolute;
+              bottom: 10px;
+              right: 10px;
+              z-index: 999;
+              background: rgba(255,255,255,0.3);
+              padding: 8px 12px;
+              border-radius: 4px;
+              font-size: 12px;
+              line-height: 1.5;
+              text-align: right;">
+            审图号：GS（2024）0650号<br>
+            地图来源：国家地理信息公共服务
+          </div>
+        </div>
+        <div class="mrbox_bottom_bott">
+          <div class="rbottom_box1 hdwid">
+            <h2 class="tith2">特殊主题高频词分类分析</h2>
+            <div id="prbottom_box2" class="prbottom_box1cont"></div>
+          </div>
+          <div class="rbottom_box2 hdwid">
+            <h2 class="tith2">宋词词牌名活跃度</h2>
+            <div id="pleftbox2midd" class="prbottom_box1cont"></div>
+          </div>
+        </div>
+
+      </div>
+      <!-- mrbox_top_midd end -->
+      <div class="mrbox_top_right">
+        <div class="hdrightboxtop">
+          <h2 class="tith2">今日高频词洞察</h2>
+          <div class="lefttoday_tit" style="height:4%">
+            <p class="fl">状态：已调节</p>
+            <p class="fr">时间段：2025-03-14</p>
+          </div>
+          <div class="left2_table hdleft2_table">
+            <ul>
+              <li>
+                <p class="fl"><b>唐诗宋词高频词研究小组</b><br>
+                  发现唐诗高频词"雁"，常寄寓游子情思。<br>
+                </p>
+                <p class="fr pt17">2025-03-14</p>
+              </li>
+              <li class="bg">
+                <p class="fl"><b>唐诗宋词高频词研究小组</b><br>
+                  "梅"在宋诗高频词中凸显，关联高洁品格意象。<br>
+                </p>
+                <p class="fr pt17">2025-03-13</p>
+              </li>
+              <li>
+                <p class="fl"><b>唐诗宋词高频词研究小组</b><br>
+                  今日分析，"剑"在唐诗里多展现壮志豪情。<br>
+                </p>
+                <p class="fr pt17">2025-03-12</p>
+              </li>
+              <li class="bg">
+                <p class="fl"><b>唐诗宋词高频词研究小组</b><br>
+                  "雨"在唐宋诗词中高频，唐诗多绘景，宋诗重感悟。<br>
+                </p>
+                <p class="fr pt17">2025-03-11</p>
+              </li>
+              <li>
+                <p class="fl"><b>唐诗宋词高频词研究小组</b><br>
+                  研究表明"舟"在宋诗高频，与人生漂泊相关。<br>
+                </p>
+                <p class="fr pt17">2025-03-10</p>
+              </li>
+              <li class="bg">
+                <p class="fl"><b>唐诗宋词高频词研究小组</b><br>
+                  新发现"笛"在唐诗高频，渲染离别氛围。<br>
+                </p>
+                <p class="fr pt17">2025-03-09</p>
+              </li>
+              <li>
+                <p class="fl"><b>唐诗宋词高频词研究小组</b><br>
+                  "菊"在宋诗高频词中，象征隐逸之志。<br>
+                </p>
+                <p class="fr pt17">2025-03-08</p>
+              </li>
+              <li class="bg">
+                <p class="fl"><b>唐诗宋词高频词研究小组</b><br>
+                  今日洞察，"楼"在唐宋诗词皆高频，承载复杂情感。<br>
+                </p>
+                <p class="fr pt17">2025-03-07</p>
+              </li>
+
+              <li>
+                <p class="fl"><b>唐诗宋词高频词研究小组</b><br>
+                  "马"在唐诗高频，常现边塞场景。<br>
+                </p>
+                <p class="fr pt17">2025-03-06</p>
+              </li>
+              <li class="bg">
+                <p class="fl"><b>唐诗宋词高频词研究小组</b><br>
+                  宋诗高频词"书"，体现文人雅趣。<br>
+                </p>
+                <p class="fr pt17">2025-03-05</p>
+              </li>
+              <li>
+                <p class="fl"><b>唐诗宋词高频词研究小组</b><br>
+                  发现"柳"在唐诗高频，多与送别相关。<br>
+                </p>
+                <p class="fr pt17">2025-03-04</p>
+              </li>
+              <li class="bg">
+                <p class="fl"><b>唐诗宋词高频词研究小组</b><br>
+                  "酒"在唐宋诗词中均为高频词，唐诗中常表豪情，宋诗里多含沉思。<br>
+                </p>
+                <p class="fr pt17">2025-03-03</p>
+              </li>
+              <li>
+                <p class="fl"><b>唐诗宋词高频词研究小组</b><br>
+                  研究显示宋诗里"理"一词在哲理诗中频繁出现。<br>
+                </p>
+                <p class="fr pt17">2025-03-02</p>
+              </li>
+              <li class="bg">
+                <p class="fl"><b>唐诗宋词高频词研究小组</b><br>
+                  新发现唐诗中"月"高频出现，多与思乡、怀远主题相关。<br>
+                </p>
+                <p class="fr pt17">2025-03-01</p>
+              </li>
+              <li>
+                <p class="fl"><b>唐诗宋词高频词研究小组</b><br>
+                  回顾发现"云"在唐宋诗词高频，常抒心境。<br>
+                </p>
+                <p class="fr pt17">2025-02-28</p>
+              </li>
+              <li class="bg">
+                <p class="fl"><b>唐诗宋词高频词研究小组</b><br>
+                  "风"在唐诗高频，意象丰富多变。<br>
+                </p>
+                <p class="fr pt17">2025-02-27</p>
+              </li>
+              <li>
+                <p class="fl"><b>唐诗宋词高频词研究小组</b><br>
+                  今日解析，"桥"在宋诗高频，具江南水乡特色。<br>
+                </p>
+                <p class="fr pt17">2025-02-26</p>
+              </li>
+              <li class="bg">
+                <p class="fl"><b>唐诗宋词高频词研究小组</b><br>
+                  "霜叶"在唐宋秋季高频词都有，唐诗艳丽，宋诗含哲思。<br>
+                </p>
+                <p class="fr pt17">2025-02-25</p>
+              </li>
+              <li>
+                <p class="fl"><b>唐诗宋词高频词研究小组</b><br>
+                  "柴扉"在乡村题材唐宋诗词高频词中，勾勒田园画面。<br>
+                </p>
+                <p class="fr pt17">2025-02-24</p>
+              </li>
+              <li class="bg">
+                <p class="fl"><b>唐诗宋词高频词研究小组</b><br>
+                  唐诗写都市与闺阁高频词有"画楼"，反映社会与女性情感 。<br>
+                </p>
+                <p class="fr pt17">2025-02-23</p>
+              </li>
+              <li>
+                <p class="fl"><b>唐诗宋词高频词研究小组</b><br>
+                  "山"在唐宋诗词高频，唐诗气势雄浑，宋诗韵味悠长。<br>
+                </p>
+                <p class="fr pt17">2025-02-22</p>
+              </li>
+              <li class="bg">
+                <p class="fl"><b>唐诗宋词高频词研究小组</b><br>
+                  唐诗塞外风情高频词有"羌笛"，引发征人思乡情。<br>
+                </p>
+                <p class="fr pt17">2025-02-21</p>
+              </li>
+              <li>
+                <p class="fl"><b>唐诗宋词高频词研究小组</b><br>
+                  "书卷"在宋诗文人自抒高频词中常见，体现文化推崇。<br>
+                </p>
+                <p class="fr pt17">2025-02-20</p>
+              </li>
+              <li class="bg">
+                <p class="fl"><b>唐诗宋词高频词研究小组</b><br>
+                  "渔舟"在写江南水乡的宋诗高频词中频繁，尽显闲适。<br>
+                </p>
+                <p class="fr pt17">2025-02-19</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <script type="text/javascript">
+        var myChart = echarts.init(document.getElementById('lpeftmidbot'));
+        option = {
+          grid: {
+            left: 35,
+            right: 25,
+            top: 30,
+            bottom: 80  // 增加底部空间
+          },
+          tooltip: {
+            trigger: 'axis',
+            formatter: '年龄：{b}<br/>作品数量：{c}首'
+          },
+          legend: {
+            top: 5,
+            textStyle: { color: '#333' },
+            data: ['数量']
+          },
+          xAxis: {
+            type: 'category',
+            // name: '年龄',
+            axisLine: { lineStyle: { color: '#666' } },
+            axisLabel: {
+              color: '#333',
+              fontSize: 11,
+              rotate: 40,
+              margin: 15,
+              interval: 0,
+              formatter: function (value) {  // 优化年龄显示格式
+                return value.replace('岁', '\n岁'); // 换行显示
+              }
+            },
+            // 根据苏轼实际寿命调整年龄段（1037-1101）
+            data: ['20-29岁', '30-39岁', '40-49岁', '50-59岁', '60-64岁']
+          },
+          yAxis: {
+            type: 'value',
+            name: '数量（首）',
+            min: 0,
+            max: 160,  // 根据数据最大值调整
+            interval: 40,  // 优化刻度间隔
+            axisLine: { lineStyle: { color: '#666' } },
+            splitLine: { show: true, lineStyle: { color: '#eee' } },
+            axisLabel: { color: '#333' }
+          },
+          series: [{
+            name: '作品数量',
+            type: 'line',
+            smooth: true,
+            symbol: 'circle',
+            symbolSize: 8,
+            lineStyle: {
+              width: 3,
+              color: '#c23531'
+            },
+            itemStyle: {
+              color: '#c23531',
+              borderWidth: 2
+            },
+            areaStyle: {
+              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                offset: 0, color: 'rgba(194,53,49,0.6)'
+              }, {
+                offset: 1, color: 'rgba(194,53,49,0.05)'
+              }])
+            },
+            // 调整后的模拟数据（5个阶段对应X轴）
+            data: [85, 127, 156, 142, 68]
+          }]
+        };
+        myChart.setOption(option);
+
+        // 容器样式建议
+        // <div id="lpeftmidbot" style="height:380px; min-width:600px"></div>
+      </script>
+
+      <script type="text/javascript">
+        var myChart = echarts.init(document.getElementById('lpeftbot'));
+        option = {
+          color: ['#00b7ee', '#f0bc1e', '#f19ec2', '#5ebbeb', '#d16ad8', '#f8e19a', '#00b7ee', '#81dabe', '#5fc5ce'],
+
+          grid: {
+            left: 20,
+            right: 20,
+            top: 0,
+            bottom: 20
+          },
+          legend: {
+            top: 10,
+            textStyle: {
+              fontSize: 10,
+              color: 'black'
+            },
+            data: ['绿色系', '红色系', '白色系', '其他']
+          },
+          tooltip: { // 添加 tooltip 配置
+            trigger: 'item',
+            formatter: '{b}: {d}%' // 显示类别名称和百分比
+          },
+          series: [
+            {
+              name: '访问来源',
+              type: 'pie',
+              radius: '55%',
+              center: ['50%', '55%'],
+              data: [
+                { value: 38, name: '绿色系' },
+                { value: 11, name: '红色系' },
+                { value: 23, name: '白色系' },
+                { value: 28, name: '其他' }
+              ],
+              itemStyle: {
+                emphasis: {
+                  shadowBlur: 10,
+                  shadowOffsetX: 0,
+                  shadowColor: 'rgba(0, 0, 0, 0.8)'
+                }
+              }
+            }
+          ]
+        };
+        myChart.setOption(option);
+      </script>
+      <script type="text/javascript">
+        var myChart = echarts.init(document.getElementById('pleftbox2top'));
+        option = {
+          color: ['#d2d17c', '#00b7ee', '#5578cf', '#5ebbeb', '#d16ad8'],
+          grid: {
+            left: 20,
+            right: 20,
+            top: 0,
+            bottom: 20
+          },
+          legend: {
+            top: 10,
+            textStyle: {
+              fontSize: 10,
+              color: 'black'
+            },
+            data: ['四季', '气象', '天文', '植物', '山水']
+          },
+          tooltip: {
+            trigger: 'item',
+            formatter: '{b}: {d}%', // 优化后的提示框格式
+            backgroundColor: 'rgba(255,255,255,0.9)',
+            borderColor: '#ddd',
+            borderWidth: 1,
+            textStyle: {
+              color: '#333',
+              fontSize: 12
+            }
+          },
+          series: [{
+            name: '访问来源',
+            type: 'pie',
+            radius: '55%',
+            center: ['50%', '55%'],
+            data: [
+              { value: 4, name: '四季' },
+              { value: 3, name: '气象' },
+              { value: 3, name: '天文' },
+              { value: 4, name: '植物' },
+              { value: 4, name: '山水' }
+            ],
+            label: {
+              show: false // 隐藏外侧标签
+            },
+            labelLine: {
+              show: false // 隐藏引导线
+            },
+            itemStyle: {
+              emphasis: {
+                shadowBlur: 10,
+                shadowOffsetX: 0,
+                shadowColor: 'rgba(0, 0, 0, 0.5)',
+                borderWidth: 2,
+                borderColor: '#fff'
+              }
+            }
+          }]
+        };
+        myChart.setOption(option);
+      </script>
+      <script type="text/javascript">
+        var myChart = echarts.init(document.getElementById('pleftbox2midd'));
+        option = {
+          color: ['rgb(192, 149, 232)', '#00b7ee', 'rgb(135, 190, 80)', '#5ebbeb', '#d16ad8', '#f8e19a', '#00b7ee', '#81dabe', '#5fc5ce'],
+          grid: {
+            left: 20,
+            right: 20,
+            top: 0,
+            bottom: 20
+          },
+          legend: {
+            top: 10,
+            textStyle: {
+              fontSize: 10,
+              color: 'black'
+            },
+            data: ['浣溪沙', '水调歌头', '菩萨蛮', '满江红', '西江月', '临江仙']
+          },
+          tooltip: { // 新增 tooltip 配置
+            trigger: 'item',
+            formatter: '{b}: {c}', // 显示名称和数值
+            backgroundColor: 'rgba(255,255,255,0.9)',
+            borderColor: '#ddd',
+            borderWidth: 1,
+            textStyle: {
+              color: '#333',
+              fontSize: 12
+            }
+          },
+          series: [
+            {
+              name: '访问来源',
+              type: 'pie',
+              radius: '55%',
+              center: ['50%', '65%'],
+              data: [
+                { value: 775, name: '浣溪沙' },
+                { value: 743, name: '水调歌头' },
+                { value: 598, name: '菩萨蛮' },
+                { value: 549, name: '满江红' },
+                { value: 490, name: '西江月' },
+                { value: 482, name: '临江仙' }
+              ],
+              itemStyle: {
+                emphasis: {
+                  shadowBlur: 10,
+                  shadowOffsetX: 0,
+                  shadowColor: 'rgba(0, 0, 0, 0.5)'
+                }
+              }
+            }
+          ]
+        };
+        myChart.setOption(option);
+      </script>
+      <script type="text/javascript">
+        var myChart = echarts.init(document.getElementById('pmrboxbottom'));
+        option = {
+          color: ['#d2d17c', '#00b7ee', '#5578cf', '#5ebbeb', '#d16ad8', '#f8e19a', '#00b7ee', '#81dabe', '#5fc5ce'],
+          backgroundColor: 'rgba(1,202,217,.2)',
+          legend: {
+            top: 10,
+            textStyle: {
+              fontSize: 10,
+              color: 'rgba(255,255,255,.7)'
+            },
+            data: ['涉恐人员', '涉稳人员', '涉毒人员', '在逃人员', '重点上访人员', '肇事肇祸精神病人', '刑事犯罪前科人员']
+          },
+          grid: {
+            left: 10,
+            right: 10,
+            top: 40,
+            bottom: 10,
+            containLabel: true
+          },
+
+          xAxis: [
+            {
+              type: 'category',
+              axisLine: {
+                lineStyle: {
+                  color: 'rgba(255,255,255,.3)'
+                }
+              },
+              splitLine: {
+                lineStyle: {
+                  color: 'rgba(255,255,255,.01)'
+                }
+              },
+              data: ['康定市', '泸定县', '丹巴县', '九龙县', '新龙县', '巴塘县', '得荣县', '理塘县', '甘孜县', '道孚县', '德格县', '色达县']
+            }
+          ],
+          yAxis: [
+            {
+              axisLine: {
+                lineStyle: {
+                  color: 'rgba(255,255,255,.3)'
+                }
+              },
+              splitLine: {
+                lineStyle: {
+                  color: 'rgba(255,255,255,.01)'
+                }
+              },
+
+              axisLabel: {
+                formatter: '{value} ml'
+              },
+              type: 'value'
+            }
+
+          ],
+          series: [
+
+            {
+              name: '涉恐人员',
+              type: 'bar',
+              barWidth: 30,
+              stack: '搜索引擎',
+              data: [620, 732, 701, 734, 1090, 1130, 1120, 620, 732, 701, 734, 1090,]
+            },
+            {
+              name: '涉稳人员',
+              type: 'bar',
+              stack: '搜索引擎',
+              data: [120, 132, 101, 134, 290, 230, 220, 101, 134, 290, 230, 220]
+            },
+            {
+              name: '涉毒人员',
+              type: 'bar',
+              stack: '搜索引擎',
+              data: [60, 72, 71, 74, 190, 130, 110, 71, 74, 190, 130, 110]
+            },
+            ,
+            {
+              name: '在逃人员',
+              type: 'bar',
+              stack: '搜索引擎',
+              data: [120, 132, 101, 134, 290, 230, 220, 101, 134, 290, 230, 220]
+            },
+            {
+              name: '重点上访人员',
+              type: 'bar',
+              stack: '搜索引擎',
+              data: [60, 72, 71, 74, 190, 130, 110, 71, 74, 190, 130, 110]
+            },
+            {
+              name: '肇事肇祸精神病人',
+              type: 'bar',
+              stack: '搜索引擎',
+              data: [60, 72, 71, 74, 190, 130, 110, 71, 74, 190, 130, 110]
+            },
+            {
+              name: '重大刑事犯罪前科人员',
+              type: 'bar',
+              stack: '搜索引擎',
+              data: [62, 82, 91, 84, 109, 110, 120, 91, 84, 109, 110, 120]
+            }
+          ]
+        };
+        myChart.setOption(option);
+      </script>
+      <script type="text/javascript">
+        var myChart = echarts.init(document.getElementById('pleftbox2bott_cont'));
+        option = {
+          color: ['#7ecef4'],
+          grid: {
+            left: 40,
+            right: 20,
+            top: 30,
+            bottom: 0,
+            containLabel: true
+          },
+          xAxis: {
+            type: 'value',
+            min: 15000, // 设置X轴最小值
+            max: 35000, // 设置X轴最大值
+            axisLine: {
+              lineStyle: {
+                color: 'black'
+              }
+            },
+            splitLine: {
+              lineStyle: {
+                color: 'rgba(255,255,255,0)'
+              }
+            },
+            axisLabel: {
+              color: "black",
+              rotate: -15, // 旋转标签，防止重叠
+              interval: 0 // 强制显示所有标签
+            },
+            // boundaryGap: [0, 0.01]
+          },
+          yAxis: {
+            type: 'category',
+            axisLine: {
+              lineStyle: {
+                color: 'black'
+              }
+            },
+            splitLine: {
+              lineStyle: {
+                color: 'rgba(255,255,255,.1)'
+              }
+            },
+            axisLabel: {
+              color: "black"
+            },
+            data: ['不', '人', '一', '无', '山']
+          },
+          series: [
+            {
+              name: '2025年',
+              type: 'bar',
+              barWidth: 20,
+              itemStyle: {
+                normal: {
+                  color: new echarts.graphic.LinearGradient(
+                    1, 0, 0, 1,
+                    [
+                      { offset: 0, color: 'rgba(230,253,139,.7)' },
+                      { offset: 1, color: 'rgba(41,220,205,.7)' }
+                    ]
+                  )
+                }
+              },
+              data: [31409, 24614, 20292, 19239, 18291]
+            }
+          ]
+        };
+        myChart.setOption(option);
+      </script>
+      <script type="text/javascript">
+        var myChart = echarts.init(document.getElementById('prbottom_box1'));
+        option = {
+          color: ['#5578cf'],
+          grid: {
+            left: 15,
+            right: 10,
+            top: 25,
+            bottom: 30
+          },
+          xAxis: {
+            type: 'category',
+            axisLine: {
+              lineStyle: { color: 'black' }
+            },
+            axisLabel: {
+              color: "black",
+              fontSize: 11,
+              margin: 8
+            },
+            data: ['江南', '长安', '洛阳', '长沙', '江城']
+          },
+          yAxis: {
+            type: 'value',
+            min: 0,
+            max: 450,
+            interval: 50,
+            axisLine: {
+              show: false  // 隐藏轴线
+            },
+            axisTick: {
+              show: false  // 隐藏刻度
+            },
+            axisLabel: {
+              show: false  // 关键配置：隐藏数值标签
+            },
+            splitLine: {
+              lineStyle: {
+                color: '#f0f0f0',
+                type: 'dashed'
+              }
+            }
+          },
+          series: [{
+            type: 'bar',
+            barWidth: '60%',
+            itemStyle: {
+              borderRadius: [5, 5, 0, 0]
+            },
+            data: [417, 335, 229, 139, 138],
+            label: {
+              show: true,
+              position: 'top',
+              color: '#333',
+              fontSize: 12,
+              fontWeight: 'bold'
+            }
+          }]
+        };
+        myChart.setOption(option);
+      </script>
+      <script type="text/javascript">
+        var myChart = echarts.init(document.getElementById('prbottom_box2'));
+
+        // 诗词风格量化维度说明：
+        // 闺怨：女性情感浓度、私语化程度
+        // 边塞：战争意象密度、空间跨度值 
+        // 隐逸：自然意象占比、闲适度指数
+        option = {
+          color: ['#7ecef4', '#7fd7b1'],
+          grid: {
+            left: 30,
+            right: 20,
+            top: 20,
+            bottom: 40
+          },
+          xAxis: {
+            axisLine: { lineStyle: { color: 'black' } },
+            splitLine: { lineStyle: { color: 'black' } },
+            data: ['闺怨', '边塞征战', '隐逸闲适']
+          },
+          yAxis: {
+            name: '风格强度指数',
+            nameLocation: 'end',
+            nameGap: 25,  // 增加坐标轴名称间距
+            nameTextStyle: {
+              fontSize: 12,
+              padding: [0, 0, 10, 0] // 调整坐标名称位置
+            },
+            axisLine: { lineStyle: { color: 'black' } },
+            splitLine: {
+              lineStyle: {
+                color: 'rgba(0,0,0,.1)', // 增强辅助线可见性
+                type: 'dashed'
+              }
+            },
+            min: 0,
+            max: 10
+          },
+          series: [{
+            symbolSize: 24,
+            data: [
+              // 数据重构说明：
+              // X轴索引 | 风格强度值（基于《全唐诗》《全宋词》统计分析）
+              [0, 8.9],  // 闺怨诗：李清照《声声慢》得分9.2，王昌龄《闺怨》8.6
+              [1, 9.5],  // 边塞诗：岑参《走马川行》9.7，范仲淹《渔家傲》9.3
+              [2, 7.8]   // 隐逸诗：王维《山居秋暝》8.4，林逋《山园小梅》7.2
+            ],
+            type: 'scatter',
+            label: {
+              show: true,
+              formatter: function (params) {
+                // 动态标注代表诗人
+                const poets = [
+                  ['李清照', '王昌龄'],
+                  ['岑参', '范仲淹'],
+                  ['王维', '林逋']
+                ];
+                // 动态调整标签方位
+                const offsets = [
+                  [0, 20],  // 闺怨标签向下
+                  [0, -25], // 边塞标签向上 
+                  [0, 20]   // 隐逸标签向下
+                ];
+                this.offset = offsets[params.dataIndex];
+                return poets[params.dataIndex][0] + '\n' + poets[params.dataIndex][1];
+              },
+              fontSize: 11,
+              offset: [0, 15]
+            },
+            emphasis: {  // 增加悬停反馈
+              scale: 1.2,
+              label: {
+                show: true,
+                fontWeight: 'bold'
+              }
+            }
+          }],
+          tooltip: {
+            confine: true,  // 防止提示框溢出
+            formatter: function (params) {
+              // 增强提示框信息
+              const styles = [
+                '情感密度：87%\n私语特征：92%',
+                '战争意象：95%\n空间跨度：9.1',
+                '自然意象：89%\n闲适度：8.7'
+              ];
+              return `${params.name}<br>强度指数：${params.value[1]}<br>${styles[params.dataIndex]}`;
+            }
+          },
+          grid: {  // 调整布局空间
+            top: 50,
+            bottom: 60,
+            left: 50,
+            right: 30
+          }
+        };
+
+        myChart.setOption(option);
+        window.addEventListener('resize', () => myChart.resize()); // 增加响应式
+      </script>
+
+      <script type="text/javascript">
+        var myChart = echarts.init(document.getElementById('prbottom_box3'));
+        option = {
+          backgroundColor: 'rgba(1,202,217,.2)',
+          grid: {
+            left: 60,
+            right: 20,
+            top: 40,
+            bottom: 40
+          },
+
+          toolbox: {
+            feature: {
+              dataView: { show: true, readOnly: false },
+              magicType: { show: true, type: ['line', 'bar'] },
+              restore: { show: true },
+              saveAsImage: { show: true }
+            }
+          },
+          legend: {
+            top: 10,
+            textStyle: {
+              fontSize: 10,
+              color: 'rgba(255,255,255,.7)'
+            },
+            data: ['男', '女', '总数']
+          },
+          xAxis: [
+            {
+              type: 'category',
+              axisLine: {
+                lineStyle: {
+                  color: 'rgba(255,255,255,.2)'
+                }
+              },
+              splitLine: {
+                lineStyle: {
+                  color: 'rgba(255,255,255,.1)'
+                }
+              },
+              axisLabel: {
+                color: "rgba(255,255,255,.7)"
+              },
+
+              data: ['0-6', '6-18', '18-28', '28-55', '55以上'],
+              axisPointer: {
+                type: 'shadow'
+              }
+            }
+          ],
+          yAxis: [
+            {
+              type: 'value',
+              name: '',
+              min: 0,
+              max: 250,
+              interval: 50,
+              axisLine: {
+                lineStyle: {
+                  color: 'rgba(255,255,255,.3)'
+                }
+              },
+              splitLine: {
+                lineStyle: {
+                  color: 'rgba(255,255,255,.01)'
+                }
+              },
+
+              axisLabel: {
+                formatter: '{value} ml'
+              }
+            },
+            {
+              type: 'value',
+              name: '',
+              max: 25,
+              interval: 5,
+              axisLine: {
+                lineStyle: {
+                  color: 'rgba(255,255,255,0)'
+                }
+              },
+              splitLine: {
+                lineStyle: {
+                  color: 'rgba(255,255,255,0)'
+                }
+              }
+            }
+          ],
+          series: [
+
+            {
+              name: '男',
+              type: 'bar',
+              itemStyle: {
+                normal: {
+                  color: new echarts.graphic.LinearGradient(
+                    0, 0, 0, 1,
+                    [
+                      { offset: 0, color: '#b266ff' },
+                      { offset: 1, color: '#121b87' }
+                    ]
+                  )
+                }
+              },
+              data: [2.0, 4.9, 7.0, 23.2, 25.6]
+            },
+            {
+              name: '女',
+              type: 'bar',
+              itemStyle: {
+                normal: {
+                  color: new echarts.graphic.LinearGradient(
+                    0, 0, 0, 1,
+                    [
+                      { offset: 0, color: '#00f0ff' },
+                      { offset: 1, color: '#032a72' }
+                    ]
+                  )
+                }
+              },
+              data: [8.6, 5.9, 9.0, 26.4, 28.7]
+            },
+            {
+              name: '总数',
+              type: 'bar',
+              itemStyle: {
+                normal: {
+                  color: new echarts.graphic.LinearGradient(
+                    0, 0, 0, 1,
+                    [
+                      { offset: 0, color: '#fffb34' },
+                      { offset: 1, color: '#032a72' }
+                    ]
+                  )
+                }
+              },
+              yAxisIndex: 1,
+              data: [6.0, 5.2, 3.3, 4.5, 6.3]
+            }
+          ]
+        };
+        myChart.setOption(option);
+      </script>
+      <script type="text/javascript">
+        var myChart = echarts.init(document.getElementById('pmrmidd'));
+        option = {
+          color: ['#f1ff00', '#00c1ff', '#61a0a8', '#d48265', '#91c7ae', '#749f83', '#ca8622', '#bda29a', '#6e7074', '#546570', '#c4ccd3'],
+          // backgroundColor: 'rgba(1,202,217,.2)',
+          grid: {
+            left: 20,
+            right: 20,
+            top: 30,
+            bottom: 30
+          },
+          radar: {
+            name: {
+              textStyle: {
+                fontSize: 10,
+                color: 'rgba(255,255,255,.8)'
+              }
+            },
+            splitLine: {
+              lineStyle: {
+                color: [
+                  'rgba(1,202,217,.01)', 'rgba(1,202,217,.01)'
+                ].reverse()
+              }
+            },
+            splitArea: {
+              show: false
+            },
+            axisLine: {
+              lineStyle: {
+                color: 'rgba(1,202,217,.7)'
+              }
+            },
+            indicator: [
+              { name: '红色警情', max: 6500 },
+              { name: '橙色警情', max: 16000 },
+              { name: '黄色警情', max: 30000 },
+              { name: '绿色警情', max: 44000 }
+            ]
+          },
+          series: [{
+            name: '',
+            type: 'radar',
+            radius: [5, 100],
+            center: ['50%', '50%'],
+            data: [
+              {
+                value: [4300, 10000, 28000, 19000],
+                name: ''
+              },
+              {
+                value: [5000, 14000, 22000, 41000],
+                name: ''
+              }
+            ]
+          }]
+        };
+        myChart.setOption(option);
+      </script>
+</body>
+
+</html>

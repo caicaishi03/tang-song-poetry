@@ -1,0 +1,152 @@
+﻿<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+
+  <script type="text/javascript" src="../js/jquery.js"></script>
+  <script type="text/javascript" src="../js/echarts.min.js"></script>
+  <script type="text/javascript" src="../js/js.js"></script>
+  <script type="text/javascript" src="../js/jquery.limarquee.js"></script>
+  <script type="text/javascript" src="../js/jquery.cxselect.min.js"></script>
+  <link rel="stylesheet" href="../css/comon0.css">
+</head>
+
+<body>
+  <div
+    style="background:linear-gradient(to top left, rgb(254, 245, 230), rgb(214, 210, 199), rgb(215, 199, 175)) center top;">
+    <div class="loading">
+      <!-- <div class="loadbox"> <img src="picture/loading.gif"> 页面加载中... </div> -->
+    </div>
+    <div class="back"></div>
+    <div class="head">
+      <a href="javascript:history.back();" class="back-button">← 返回</a>
+      <h1>唐朝诗歌研究</h1>
+      <!-- <div class="weather"><span id="showTime"></span></div> -->
+    </div>
+    </script>
+    <div class="mainbox">
+      <ul class="clearfix">
+        <li>
+          <div class="boxall" style="height:545px;">
+            <div class="navboxall">
+              <div class="sycm">
+                <ul class="clearfix">
+                  <li>
+                    <h2>55000</h2>
+                    <span>诗歌总数量约</span>
+                  </li>
+                  <li>
+                    <h2>3000</h2>
+                    <span>诗人总数量约</span>
+                  </li>
+
+                </ul>
+
+              </div>
+
+              <ul class="jindu clearfix">
+                <div>中唐</div>
+                <div>盛唐</div>
+                <li id="zb1"></li>
+                <li id="zb2"></li>
+                <li id="zb3"></li>
+                <li id="zb4"></li>
+              </ul>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="boxall" style="height:545px">
+            <div class="alltitle">唐朝十大诗人</div>
+            <div class="navboxall" id="echart4"></div>
+          </div>
+        </li>
+        <li>
+          <div class="boxall" style="height:260px">
+            <div class="alltitle">唐诗各个类型数据统计</div>
+            <div class="navboxall" id="echart1"> </div>
+          </div>
+          <div class="boxall" style="height:270px">
+            <div class="alltitle">李白诗作品中各个类型占比</div>
+            <div class="navboxall" id="echart2"> </div>
+          </div>
+        </li>
+      </ul>
+      <ul class="clearfix">
+        <li>
+          <div class="boxall" style="height:390px;">
+            <div class="alltitle">唐诗排行榜</div>
+            <div class="navboxall">
+              <div class="wraptit">
+                <span>排名</span>
+                <span>诗名</span>
+                <span>作者</span>
+              </div>
+              <div class="wrap">
+                <ul>
+                  <li>
+                    <p><span>1</span><span>《黄鹤楼》</span><span>崔颢</span></p>
+                  </li>
+                  <li>
+                    <p><span>2</span><span>《送元二使安西》</span><span>王维</span></p>
+                  </li>
+                  <li>
+                    <p><span>3</span><span>《凉州词》</span><span>王之涣</span></p>
+                  </li>
+                  <li>
+                    <p><span>4</span><span>《登鹳雀楼》</span><span>王之涣</span></p>
+                  </li>
+                  <li>
+                    <p><span>5</span><span>《登岳阳楼》</span><span>杜甫</span></p>
+                  </li>
+                  <li>
+                    <p><span>6</span><span>《登柳州城楼寄漳汀封连四州刺史》</span><span>柳宗元</span></p>
+                  </li>
+                  <li>
+                    <p><span>7</span><span>《临洞庭湖赠张丞相》</span><span>孟浩然</span></p>
+                  </li>
+                  <li>
+                    <p><span>8</span><span>《题破山寺后禅院》</span><span>常建</span></p>
+                  </li>
+                  <li>
+                    <p><span>9</span><span>《送杜少府之任蜀州》</span><span>王勃</span></p>
+                  </li>
+                  <li>
+                    <p><span>10</span><span>《蜀道难》</span><span>李白</span></p>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li style="width:38%">
+          <div class="boxall" style="height:390px">
+            <div class="alltitle">全唐诗中常见的情感</div>
+            <div class="navboxall" id="echart3"></div>
+          </div>
+        </li>
+        <li style="width:38%">
+          <div class="boxall" style="height:390px">
+            <div class="alltitle">全唐诗中重要字频率</div>
+            <div class="navboxall" id="echart5"></div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+
+    $(function () {
+      $('.wrap').liMarquee({
+        direction: 'up',//身上滚动
+        //runshort: false,//内容不足时不滚动
+        scrollamount: 20//速度
+      });
+    });
+  </script>
+
+</body>
+
+</html>

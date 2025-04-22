@@ -1,0 +1,1312 @@
+{
+    "nodes": [
+        {
+            "name": "中国诗词体系",
+            "value": 15,
+            "category": 0
+        },
+        {
+            "name": "唐朝",
+            "value": 12,
+            "category": 1
+        },
+        {
+            "name": "宋朝",
+            "value": 10,
+            "category": 1
+        },
+        {
+            "name": "初唐",
+            "value": 8,
+            "category": 2
+        },
+        {
+            "name": "盛唐",
+            "value": 15,
+            "category": 2
+        },
+        {
+            "name": "中唐",
+            "value": 7,
+            "category": 2
+        },
+        {
+            "name": "晚唐",
+            "value": 6,
+            "category": 2
+        },
+        {
+            "name": "北宋",
+            "value": 9,
+            "category": 2
+        },
+        {
+            "name": "南宋",
+            "value": 8,
+            "category": 2
+        },
+        {
+            "name": "王勃",
+            "value": 6,
+            "category": 3
+        },
+        {
+            "name": "杨炯",
+            "value": 5,
+            "category": 3
+        },
+        {
+            "name": "卢照邻",
+            "value": 5,
+            "category": 3
+        },
+        {
+            "name": "骆宾王",
+            "value": 6,
+            "category": 3
+        },
+        {
+            "name": "贺知章",
+            "value": 7,
+            "category": 4
+        },
+        {
+            "name": "陈子昂",
+            "value": 7,
+            "category": 3
+        },
+        {
+            "name": "李白",
+            "value": 20,
+            "category": 4,
+            "symbolSize": 25
+        },
+        {
+            "name": "杜甫",
+            "value": 18,
+            "category": 4
+        },
+        {
+            "name": "孟浩然",
+            "value": 12,
+            "category": 4
+        },
+        {
+            "name": "王维",
+            "value": 12,
+            "category": 3
+        },
+        {
+            "name": "高适",
+            "value": 10,
+            "category": 4
+        },
+        {
+            "name": "岑参",
+            "value": 10,
+            "category": 4
+        },
+        {
+            "name": "王昌龄",
+            "value": 12,
+            "category": 4
+        },
+        {
+            "name": "元丹丘",
+            "value": 8,
+            "category": 4
+        },
+        {
+            "name": "汪伦",
+            "value": 8,
+            "category": 4
+        },
+        {
+            "name": "韩愈",
+            "value": 9,
+            "category": 3
+        },
+        {
+            "name": "白居易",
+            "value": 10,
+            "category": 3
+        },
+        {
+            "name": "李商隐",
+            "value": 8,
+            "category": 3
+        },
+        {
+            "name": "杜牧",
+            "value": 8,
+            "category": 3
+        },
+        {
+            "name": "苏轼",
+            "value": 12,
+            "category": 3
+        },
+        {
+            "name": "黄庭坚",
+            "value": 9,
+            "category": 3
+        },
+        {
+            "name": "王安石",
+            "value": 8,
+            "category": 3
+        },
+        {
+            "name": "欧阳修",
+            "value": 9,
+            "category": 3
+        },
+        {
+            "name": "李清照",
+            "value": 9,
+            "category": 3
+        },
+        {
+            "name": "陆游",
+            "value": 8,
+            "category": 3
+        },
+        {
+            "name": "杜甫",
+            "value": 25,
+            "category": 5,
+            "symbolSize": 28
+        },
+        {
+            "name": "李白",
+            "value": 15,
+            "category": 5,
+            "fixY": true
+        },
+        {
+            "name": "高适",
+            "value": 12,
+            "category": 5
+        },
+        {
+            "name": "岑参",
+            "value": 12,
+            "category": 5
+        },
+        {
+            "name": "严武",
+            "value": 10,
+            "category": 5
+        },
+        {
+            "name": "韦迢",
+            "value": 8,
+            "category": 5
+        },
+        {
+            "name": "孟云卿",
+            "value": 9,
+            "category": 5
+        },
+        {
+            "name": "房琯",
+            "value": 8,
+            "category": 5
+        },
+        {
+            "name": "郑虔",
+            "value": 10,
+            "category": 5
+        },
+        {
+            "name": "储光羲",
+            "value": 9,
+            "category": 5
+        },
+        {
+            "name": "薛据",
+            "value": 8,
+            "category": 5
+        },
+        {
+            "name": "岑参",
+            "value": 25,
+            "category": 6,
+            "symbolSize": 28
+        },
+        {
+            "name": "高适",
+            "value": 12,
+            "category": 6
+        },
+        {
+            "name": "杜甫",
+            "value": 12,
+            "category": 6
+        },
+        {
+            "name": "王维",
+            "value": 10,
+            "category": 6
+        },
+        {
+            "name": "李白",
+            "value": 15,
+            "category": 6
+        },
+        {
+            "name": "储光羲",
+            "value": 9,
+            "category": 6
+        },
+        {
+            "name": "薛据",
+            "value": 8,
+            "category": 6
+        },
+        {
+            "name": "封常清",
+            "value": 10,
+            "category": 6
+        },
+        {
+            "name": "严武",
+            "value": 10,
+            "category": 6
+        },
+        {
+            "name": "柳宗元",
+            "value": 8,
+            "category": 3
+        },
+        {
+            "name": "张九龄",
+            "value": 8,
+            "category": 3
+        },
+        {
+            "name": "韩朝宗",
+            "value": 7,
+            "category": 5
+        },
+        {
+            "name": "张子容",
+            "value": 6,
+            "category": 3
+        },
+        {
+            "name": "孟浩然",
+            "value": 25,
+            "category": 7,
+            "symbolSize": 28
+        },
+        {
+            "name": "王维",
+            "value": 10,
+            "category": 7
+        },
+        {
+            "name": "李白",
+            "value": 15,
+            "category": 7
+        },
+        {
+            "name": "杜甫",
+            "value": 12,
+            "category": 7
+        },
+        {
+            "name": "王昌龄",
+            "value": 10,
+            "category": 7
+        },
+        {
+            "name": "张九龄",
+            "value": 8,
+            "category": 7
+        },
+        {
+            "name": "韩朝宗",
+            "value": 7,
+            "category": 7
+        },
+        {
+            "name": "储光羲",
+            "value": 9,
+            "category": 7
+        },
+        {
+            "name": "张子容",
+            "value": 6,
+            "category": 7
+        },
+        {
+            "name": "刘禹锡",
+            "value": 8,
+            "category": 3
+        },
+        {
+            "name": "李贺",
+            "value": 8,
+            "category": 3
+        },
+        {
+            "name": "李颀",
+            "value": 8,
+            "category": 3
+        },
+        {
+            "name": "高适",
+            "value": 25,
+            "category": 8,
+            "symbolSize": 28
+        },
+        {
+            "name": "岑参",
+            "value": 12,
+            "category": 8
+        },
+        {
+            "name": "杜甫",
+            "value": 12,
+            "category": 8
+        },
+        {
+            "name": "王维",
+            "value": 10,
+            "category": 8
+        },
+        {
+            "name": "李颀",
+            "value": 8,
+            "category": 8
+        },
+        {
+            "name": "储光羲",
+            "value": 9,
+            "category": 8
+        },
+        {
+            "name": "薛据",
+            "value": 8,
+            "category": 8
+        },
+        {
+            "name": "王昌龄",
+            "value": 10,
+            "category": 8
+        },
+        {
+            "name": "李白",
+            "value": 15,
+            "category": 8
+        },
+        {
+            "name": "严武",
+            "value": 10,
+            "category": 8
+        },
+        {
+            "name": "裴迪",
+            "value": 7,
+            "category": 3
+        },
+        {
+            "name": "王维",
+            "value": 25,
+            "category": 9,
+            "symbolSize": 28
+        },
+        {
+            "name": "孟浩然",
+            "value": 12,
+            "category": 9
+        },
+        {
+            "name": "裴迪",
+            "value": 7,
+            "category": 9
+        },
+        {
+            "name": "杜甫",
+            "value": 12,
+            "category": 9
+        },
+        {
+            "name": "李白",
+            "value": 15,
+            "category": 9
+        },
+        {
+            "name": "岑参",
+            "value": 10,
+            "category": 9
+        },
+        {
+            "name": "高适",
+            "value": 10,
+            "category": 9
+        },
+        {
+            "name": "储光羲",
+            "value": 9,
+            "category": 9
+        },
+        {
+            "name": "王昌龄",
+            "value": 10,
+            "category": 9
+        },
+        {
+            "name": "张九龄",
+            "value": 8,
+            "category": 9
+        },
+        {
+            "name": "令狐楚",
+            "value": 9,
+            "category": 3
+        },
+        {
+            "name": "李商隐",
+            "value": 25,
+            "category": 10,
+            "symbolSize": 28
+        },
+        {
+            "name": "杜牧",
+            "value": 8,
+            "category": 10
+        },
+        {
+            "name": "温庭筠",
+            "value": 8,
+            "category": 10
+        },
+        {
+            "name": "令狐楚",
+            "value": 9,
+            "category": 10
+        },
+        {
+            "name": "韩愈",
+            "value": 9,
+            "category": 10
+        },
+        {
+            "name": "李贺",
+            "value": 8,
+            "category": 10
+        },
+        {
+            "name": "秦观",
+            "value": 8,
+            "category": 3
+        },
+        {
+            "name": "晁补之",
+            "value": 7,
+            "category": 3
+        },
+        {
+            "name": "张耒",
+            "value": 7,
+            "category": 3
+        },
+        {
+            "name": "苏辙",
+            "value": 9,
+            "category": 3
+        },
+        {
+            "name": "曾巩",
+            "value": 8,
+            "category": 3
+        },
+        {
+            "name": "贺铸",
+            "value": 7,
+            "category": 3
+        },
+        {
+            "name": "苏轼",
+            "value": 30,
+            "category": 11,
+            "symbolSize": 32
+        },
+        {
+            "name": "黄庭坚",
+            "value": 12,
+            "category": 11
+        },
+        {
+            "name": "秦观",
+            "value": 10,
+            "category": 11
+        },
+        {
+            "name": "晁补之",
+            "value": 8,
+            "category": 11
+        },
+        {
+            "name": "张耒",
+            "value": 8,
+            "category": 11
+        },
+        {
+            "name": "苏辙",
+            "value": 10,
+            "category": 11
+        },
+        {
+            "name": "欧阳修",
+            "value": 10,
+            "category": 11
+        },
+        {
+            "name": "王安石",
+            "value": 9,
+            "category": 11
+        },
+        {
+            "name": "曾巩",
+            "value": 8,
+            "category": 11
+        },
+        {
+            "name": "贺铸",
+            "value": 7,
+            "category": 11
+        },
+        {
+            "name": "王令",
+            "value": 7,
+            "category": 3
+        },
+        {
+            "name": "司马光",
+            "value": 9,
+            "category": 3
+        },
+        {
+            "name": "王安石",
+            "value": 28,
+            "category": 12,
+            "symbolSize": 30
+        },
+        {
+            "name": "欧阳修",
+            "value": 10,
+            "category": 12
+        },
+        {
+            "name": "曾巩",
+            "value": 9,
+            "category": 12
+        },
+        {
+            "name": "王令",
+            "value": 8,
+            "category": 12
+        },
+        {
+            "name": "苏轼",
+            "value": 12,
+            "category": 12
+        },
+        {
+            "name": "苏辙",
+            "value": 9,
+            "category": 12
+        },
+        {
+            "name": "司马光",
+            "value": 10,
+            "category": 12
+        },
+        {
+            "name": "温庭筠",
+            "value": 8,
+            "category": 3
+        },
+        {
+            "name": "赵明诚",
+            "value": 9,
+            "category": 3
+        },
+        {
+            "name": "李格非",
+            "value": 8,
+            "category": 3
+        },
+        {
+            "name": "朱敦儒",
+            "value": 7,
+            "category": 3
+        },
+        {
+            "name": "向子諲",
+            "value": 7,
+            "category": 3
+        },
+        {
+            "name": "周邦彦",
+            "value": 9,
+            "category": 3
+        },
+        {
+            "name": "吕本中",
+            "value": 7,
+            "category": 3
+        },
+        {
+            "name": "韩驹",
+            "value": 7,
+            "category": 3
+        },
+        {
+            "name": "李清照",
+            "value": 25,
+            "category": 13,
+            "symbolSize": 28
+        },
+        {
+            "name": "赵明诚",
+            "value": 12,
+            "category": 13
+        },
+        {
+            "name": "李格非",
+            "value": 10,
+            "category": 13
+        },
+        {
+            "name": "晁补之",
+            "value": 8,
+            "category": 13
+        },
+        {
+            "name": "张耒",
+            "value": 8,
+            "category": 13
+        },
+        {
+            "name": "朱敦儒",
+            "value": 7,
+            "category": 13
+        },
+        {
+            "name": "向子諲",
+            "value": 7,
+            "category": 13
+        },
+        {
+            "name": "周邦彦",
+            "value": 9,
+            "category": 13
+        },
+        {
+            "name": "秦观",
+            "value": 9,
+            "category": 13
+        },
+        {
+            "name": "吕本中",
+            "value": 7,
+            "category": 13
+        },
+        {
+            "name": "韩驹",
+            "value": 7,
+            "category": 13
+        }
+    ],
+    "links": [
+        {
+            "source": 0,
+            "target": 1
+        },
+        {
+            "source": 0,
+            "target": 2
+        },
+        {
+            "source": 1,
+            "target": 3
+        },
+        {
+            "source": 1,
+            "target": 4
+        },
+        {
+            "source": 1,
+            "target": 5
+        },
+        {
+            "source": 1,
+            "target": 6
+        },
+        {
+            "source": 2,
+            "target": 7
+        },
+        {
+            "source": 2,
+            "target": 8
+        },
+        {
+            "source": 3,
+            "target": 9
+        },
+        {
+            "source": 3,
+            "target": 10
+        },
+        {
+            "source": 3,
+            "target": 11
+        },
+        {
+            "source": 3,
+            "target": 12
+        },
+        {
+            "source": 3,
+            "target": 13
+        },
+        {
+            "source": 3,
+            "target": 14
+        },
+        {
+            "source": 8,
+            "target": 32
+        },
+        {
+            "source": 4,
+            "target": 15
+        },
+        {
+            "source": 4,
+            "target": 16
+        },
+        {
+            "source": 4,
+            "target": 17
+        },
+        {
+            "source": 4,
+            "target": 23
+        },
+        {
+            "source": 7,
+            "target": 31
+        },
+        {
+            "source": 4,
+            "target": 24
+        },
+        {
+            "source": 5,
+            "target": 24
+        },
+        {
+            "source": 5,
+            "target": 25
+        },
+        {
+            "source": 5,
+            "target": 44
+        },
+        {
+            "source": 5,
+            "target": 45
+        },
+        {
+            "source": 5,
+            "target": 46
+        },
+        {
+            "source": 6,
+            "target": 29
+        },
+        {
+            "source": 6,
+            "target": 30
+        },
+        {
+            "source": 15,
+            "target": 16
+        },
+        {
+            "source": 15,
+            "target": 18
+        },
+        {
+            "source": 15,
+            "target": 19
+        },
+        {
+            "source": 15,
+            "target": 20
+        },
+        {
+            "source": 15,
+            "target": 21
+        },
+        {
+            "source": 15,
+            "target": 13
+        },
+        {
+            "source": 15,
+            "target": 22
+        },
+        {
+            "source": 15,
+            "target": 23
+        },
+        {
+            "source": 7,
+            "target": 25
+        },
+        {
+            "source": 7,
+            "target": 26
+        },
+        {
+            "source": 7,
+            "target": 27
+        },
+        {
+            "source": 7,
+            "target": 28
+        },
+        {
+            "source": 8,
+            "target": 29
+        },
+        {
+            "source": 8,
+            "target": 30
+        },
+        {
+            "source": 16,
+            "target": 34,
+            "lineStyle": {
+                "type": "dotted"
+            }
+        },
+        {
+            "source": 17,
+            "target": 58,
+            "lineStyle": {
+                "type": "dotted"
+            }
+        },
+        {
+            "source": 18,
+            "target": 81,
+            "lineStyle": {
+                "type": "dotted"
+            }
+        },
+        {
+            "source": 19,
+            "target": 70,
+            "lineStyle": {
+                "type": "dotted"
+            }
+        },
+        {
+            "source": 26,
+            "target": 92,
+            "lineStyle": {
+                "type": "dotted"
+            }
+        },
+        {
+            "source": 28,
+            "target": 104,
+            "lineStyle": {
+                "type": "dotted"
+            }
+        },
+        {
+            "source": 30,
+            "target": 116,
+            "lineStyle": {
+                "type": "dotted"
+            }
+        },
+        {
+            "source": 32,
+            "target": 131,
+            "lineStyle": {
+                "type": "dotted"
+            }
+        },
+        {
+            "source": 34,
+            "target": 35
+        },
+        {
+            "source": 34,
+            "target": 36
+        },
+        {
+            "source": 34,
+            "target": 37
+        },
+        {
+            "source": 34,
+            "target": 38
+        },
+        {
+            "source": 34,
+            "target": 39
+        },
+        {
+            "source": 34,
+            "target": 40
+        },
+        {
+            "source": 34,
+            "target": 41
+        },
+        {
+            "source": 34,
+            "target": 42
+        },
+        {
+            "source": 34,
+            "target": 43
+        },
+        {
+            "source": 34,
+            "target": 44
+        },
+        {
+            "source": 20,
+            "target": 45,
+            "lineStyle": {
+                "type": "dotted"
+            }
+        },
+        {
+            "source": 45,
+            "target": 46
+        },
+        {
+            "source": 45,
+            "target": 47
+        },
+        {
+            "source": 45,
+            "target": 48
+        },
+        {
+            "source": 45,
+            "target": 49
+        },
+        {
+            "source": 45,
+            "target": 50
+        },
+        {
+            "source": 45,
+            "target": 51
+        },
+        {
+            "source": 45,
+            "target": 52
+        },
+        {
+            "source": 45,
+            "target": 53
+        },
+        {
+            "source": 58,
+            "target": 59
+        },
+        {
+            "source": 58,
+            "target": 60
+        },
+        {
+            "source": 58,
+            "target": 61
+        },
+        {
+            "source": 58,
+            "target": 62
+        },
+        {
+            "source": 58,
+            "target": 63
+        },
+        {
+            "source": 58,
+            "target": 64
+        },
+        {
+            "source": 58,
+            "target": 65
+        },
+        {
+            "source": 58,
+            "target": 66
+        },
+        {
+            "source": 70,
+            "target": 71
+        },
+        {
+            "source": 70,
+            "target": 72
+        },
+        {
+            "source": 70,
+            "target": 73
+        },
+        {
+            "source": 70,
+            "target": 74
+        },
+        {
+            "source": 70,
+            "target": 75
+        },
+        {
+            "source": 70,
+            "target": 76
+        },
+        {
+            "source": 70,
+            "target": 77
+        },
+        {
+            "source": 70,
+            "target": 78
+        },
+        {
+            "source": 70,
+            "target": 79
+        },
+        {
+            "source": 81,
+            "target": 82
+        },
+        {
+            "source": 81,
+            "target": 83
+        },
+        {
+            "source": 81,
+            "target": 84
+        },
+        {
+            "source": 81,
+            "target": 85
+        },
+        {
+            "source": 81,
+            "target": 86
+        },
+        {
+            "source": 81,
+            "target": 87
+        },
+        {
+            "source": 81,
+            "target": 88
+        },
+        {
+            "source": 81,
+            "target": 89
+        },
+        {
+            "source": 81,
+            "target": 90
+        },
+        {
+            "source": 92,
+            "target": 93
+        },
+        {
+            "source": 92,
+            "target": 94
+        },
+        {
+            "source": 92,
+            "target": 95
+        },
+        {
+            "source": 92,
+            "target": 96
+        },
+        {
+            "source": 92,
+            "target": 97
+        },
+        {
+            "source": 104,
+            "target": 105
+        },
+        {
+            "source": 104,
+            "target": 106
+        },
+        {
+            "source": 104,
+            "target": 107
+        },
+        {
+            "source": 104,
+            "target": 108
+        },
+        {
+            "source": 104,
+            "target": 109
+        },
+        {
+            "source": 104,
+            "target": 110
+        },
+        {
+            "source": 104,
+            "target": 111
+        },
+        {
+            "source": 104,
+            "target": 112
+        },
+        {
+            "source": 104,
+            "target": 113
+        },
+        {
+            "source": 116,
+            "target": 116
+        },
+        {
+            "source": 116,
+            "target": 117
+        },
+        {
+            "source": 116,
+            "target": 118
+        },
+        {
+            "source": 116,
+            "target": 119
+        },
+        {
+            "source": 116,
+            "target": 121
+        },
+        {
+            "source": 115,
+            "target": 122
+        },
+        {
+            "source": 131,
+            "target": 132
+        },
+        {
+            "source": 131,
+            "target": 133
+        },
+        {
+            "source": 131,
+            "target": 134
+        },
+        {
+            "source": 131,
+            "target": 135
+        },
+        {
+            "source": 131,
+            "target": 136
+        },
+        {
+            "source": 131,
+            "target": 137
+        },
+        {
+            "source": 131,
+            "target": 138
+        },
+        {
+            "source": 131,
+            "target": 139
+        },
+        {
+            "source": 131,
+            "target": 140
+        },
+        {
+            "source": 131,
+            "target": 141
+        }
+    ],
+    "categories": [
+        {
+            "name": "根节点",
+            "color": "#2F4F4F"
+        },
+        {
+            "name": "朝代",
+            "color": "#8B0000"
+        },
+        {
+            "name": "时期",
+            "color": "#D2691E"
+        },
+        {
+            "name": "诗人",
+            "color": "#4682B4"
+        },
+        {
+            "name": "李白关系网",
+            "color": "#20B2AA"
+        },
+        {
+            "name": "杜甫关系网",
+            "color": "#9370DB"
+        },
+        {
+            "name": "岑参关系网",
+            "color": "#FFA500"
+        },
+        {
+            "name": "孟浩然关系网",
+            "color": "#FF69B4"
+        },
+        {
+            "name": "高适关系网",
+            "color": "#32CD32"
+        },
+        {
+            "name": "王维关系网",
+            "color": "#800080"
+        },
+        {
+            "name": "李商隐关系网",
+            "color": "#FF1493"
+        },
+        {
+            "name": "苏轼关系网",
+            "color": "#FFD700"
+        },
+        {
+            "name": "王安石关系网",
+            "color": "aquamarine"
+        },
+        {
+            "name": "李清照关系网",
+            "color": "#FF007F"
+        }
+    ]
+}

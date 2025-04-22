@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>诗词浏览 - 数据视角下的唐诗宋词高频分析</title>
+    <link rel="stylesheet" href="../css/index.css">
+    <style>
+        .poem-container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+        }
+        .filter-group label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .filter-group select, .filter-group input {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .search-btn {
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            align-self: flex-end;
+        }
+        .search-btn:hover {
+            background-color: #0056b3;
+        }
+        .poems-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .poem-card {
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .poem-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        .poem-title {
+            font-size: 18px;
+            margin: 0 0 10px 0;
+            color: #333;
+        }
+        .poem-author {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+        .poem-dynasty {
+            display: inline-block;
+            padding: 3px 8px;
+            background-color: #f0f0f0;
+            color: #555;
+            border-radius: 4px;
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+        .poem-content {
+            white-space: pre-line;
+            font-size: 15px;
+            line-height: 1.6;
+            color: #444;
+            margin-top: 10px;
+            max-height: 200px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        .page-link {
+            padding: 8px 12px;
+            margin: 0 5px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .page-link.active {
+            background-color: #007bff;
+            color: white;
+            border-color: #007bff;
+        }
+        .poem-detail-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        .poem-detail {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+        }
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
+        }
+        .poem-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-top: 10px;
+        }
+        .poem-tag {
+            padding: 2px 8px;
+            background-color: #e6f7ff;
+            color: #0066cc;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+        .user-avatar-container {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+        }
+    </style>
+</head>
+<body>
+    <!-- 用户头像区域 -->
+    <div class="user-avatar-container">
+        <img src="../img/default-avatar.png" alt="用户头像" class="user-avatar">
+        <div class="login-status">
+            <div id="username-display">未登录</div>
+            <div class="login-links">
+                <a href="登录.html" id="login-link">登录/注册</a>
+                <a href="#" id="logout-link" style="display: none;">退出登录</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="poem-container">
+        <h1>唐诗宋词浏览</h1>
+        
+        <div class="filters">
+            <div class="filter-group">
+                <label for="title-filter">标题</label>
+                <input type="text" id="title-filter" placeholder="输入标题关键词">
+            </div>
+            <div class="filter-group">
+                <label for="author-filter">作者</label>
+                <input type="text" id="author-filter" placeholder="输入作者名">
+            </div>
+            <div class="filter-group">
+                <label for="dynasty-filter">朝代</label>
+                <select id="dynasty-filter">
+                    <option value="">全部</option>
+                    <!-- 朝代选项将通过API动态加载 -->
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="category-filter">类别</label>
+                <select id="category-filter">
+                    <option value="">全部</option>
+                    <!-- 类别选项将通过API动态加载 -->
+                </select>
+            </div>
+            <button class="search-btn" id="search-btn">搜索</button>
+        </div>
+        
+        <div class="poems-list" id="poems-list">
+            <!-- 诗词列表将通过API动态加载 -->
+        </div>
+        
+        <div class="pagination" id="pagination">
+            <!-- 分页将通过API动态加载 -->
+        </div>
+    </div>
+    
+    <!-- 诗词详情弹窗 -->
+    <div class="poem-detail-container" id="poem-detail-container">
+        <div class="poem-detail" id="poem-detail">
+            <span class="close-button" id="close-detail">&times;</span>
+            <h2 id="detail-title"></h2>
+            <div id="detail-author" class="poem-author"></div>
+            <div id="detail-dynasty" class="poem-dynasty"></div>
+            <pre id="detail-content" class="poem-content"></pre>
+            <div class="poem-tags" id="detail-tags">
+                <!-- 标签将通过API动态加载 -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 避免全局变量冲突
+        (function() {
+            // API基础URL
+            const API_BASE_URL = 'http://localhost:3000/api';
+            
+            // 当前页码和每页数量
+            let currentPage = 1;
+            const perPage = 12;
+            
+            // DOM元素
+            const poemsList = document.getElementById('poems-list');
+            const pagination = document.getElementById('pagination');
+            const searchBtn = document.getElementById('search-btn');
+            const titleFilter = document.getElementById('title-filter');
+            const authorFilter = document.getElementById('author-filter');
+            const dynastyFilter = document.getElementById('dynasty-filter');
+            const categoryFilter = document.getElementById('category-filter');
+            const poemDetailContainer = document.getElementById('poem-detail-container');
+            const poemDetail = document.getElementById('poem-detail');
+            const closeDetail = document.getElementById('close-detail');
+            
+            // 检查用户登录状态
+            function checkLoginStatus() {
+                const token = localStorage.getItem('token');
+                const usernameDisplay = document.getElementById('username-display');
+                const loginLink = document.getElementById('login-link');
+                const logoutLink = document.getElementById('logout-link');
+                
+                if (token) {
+                    // 验证令牌
+                    fetch(`${API_BASE_URL}/validate`, {
+                        headers: {
+                            'Authorization': `Bearer ${token}`
+                        }
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.success) {
+                            usernameDisplay.textContent = data.user.username;
+                            loginLink.style.display = 'none';
+                            logoutLink.style.display = 'block';
+                        } else {
+                            // 令牌无效，清除本地存储
+                            localStorage.removeItem('token');
+                            usernameDisplay.textContent = '未登录';
+                            loginLink.style.display = 'block';
+                            logoutLink.style.display = 'none';
+                        }
+                    })
+                    .catch(err => {
+                        console.error('验证令牌失败:', err);
+                        usernameDisplay.textContent = '未登录';
+                        loginLink.style.display = 'block';
+                        logoutLink.style.display = 'none';
+                    });
+                } else {
+                    usernameDisplay.textContent = '未登录';
+                    loginLink.style.display = 'block';
+                    logoutLink.style.display = 'none';
+                }
+            }
+            
+            // 加载诗词列表
+            function loadPoems() {
+                // 构建查询参数
+                const queryParams = new URLSearchParams({
+                    page: currentPage,
+                    limit: perPage,
+                    title: titleFilter.value,
+                    author: authorFilter.value,
+                    dynasty: dynastyFilter.value,
+                    category: categoryFilter.value
+                });
+                
+                // 发送请求
+                fetch(`${API_BASE_URL}/poems?${queryParams.toString()}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.success) {
+                            displayPoems(data.data);
+                            displayPagination(data.pagination);
+                        } else {
+                            poemsList.innerHTML = `<p>加载诗词失败: ${data.message}</p>`;
+                        }
+                    })
+                    .catch(err => {
+                        console.error('加载诗词失败:', err);
+                        poemsList.innerHTML = '<p>网络错误，请稍后重试</p>';
+                    });
+            }
+            
+            // 显示诗词列表
+            function displayPoems(poems) {
+                poemsList.innerHTML = '';
+                
+                if (poems.length === 0) {
+                    poemsList.innerHTML = '<p>没有找到符合条件的诗词</p>';
+                    return;
+                }
+                
+                poems.forEach(poem => {
+                    const poemCard = document.createElement('div');
+                    poemCard.className = 'poem-card';
+                    poemCard.innerHTML = `
+                        <h3 class="poem-title">${poem.title}</h3>
+                        <div class="poem-author">${poem.author}</div>
+                        <div class="poem-dynasty">${poem.dynasty}${poem.category ? ' · ' + poem.category : ''}</div>
+                        <div class="poem-content">${formatContent(poem.content, 100)}</div>
+                    `;
+                    
+                    // 点击诗词卡片显示详情
+                    poemCard.addEventListener('click', () => {
+                        loadPoemDetail(poem.id);
+                    });
+                    
+                    poemsList.appendChild(poemCard);
+                });
+            }
+            
+            // 格式化诗词内容（截取长度）
+            function formatContent(content, maxLength) {
+                if (!content) return '';
+                
+                if (content.length <= maxLength) {
+                    return content;
+                }
+                
+                return content.substring(0, maxLength) + '...';
+            }
+            
+            // 显示分页
+            function displayPagination(paginationData) {
+                const { page, pages, total } = paginationData;
+                
+                pagination.innerHTML = '';
+                
+                // 显示页数信息
+                const pageInfo = document.createElement('div');
+                pageInfo.textContent = `共 ${total} 首诗词，第 ${page}/${pages} 页`;
+                pageInfo.style.margin = '0 10px';
+                pagination.appendChild(pageInfo);
+                
+                // 添加上一页按钮
+                if (page > 1) {
+                    const prevButton = createPageButton(page - 1, '上一页');
+                    pagination.appendChild(prevButton);
+                }
+                
+                // 添加页码按钮
+                const startPage = Math.max(1, page - 2);
+                const endPage = Math.min(pages, page + 2);
+                
+                for (let i = startPage; i <= endPage; i++) {
+                    const pageButton = createPageButton(i, i.toString(), i === page);
+                    pagination.appendChild(pageButton);
+                }
+                
+                // 添加下一页按钮
+                if (page < pages) {
+                    const nextButton = createPageButton(page + 1, '下一页');
+                    pagination.appendChild(nextButton);
+                }
+            }
+            
+            // 创建分页按钮
+            function createPageButton(page, text, isActive = false) {
+                const button = document.createElement('span');
+                button.className = `page-link${isActive ? ' active' : ''}`;
+                button.textContent = text;
+                button.addEventListener('click', () => {
+                    currentPage = page;
+                    loadPoems();
+                    window.scrollTo(0, 0);
+                });
+                return button;
+            }
+            
+            // 加载诗词详情
+            function loadPoemDetail(poemId) {
+                fetch(`${API_BASE_URL}/poems/${poemId}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.success) {
+                            displayPoemDetail(data.data);
+                        } else {
+                            alert(`加载诗词详情失败: ${data.message}`);
+                        }
+                    })
+                    .catch(err => {
+                        console.error('加载诗词详情失败:', err);
+                        alert('网络错误，请稍后重试');
+                    });
+            }
+            
+            // 显示诗词详情
+            function displayPoemDetail(poem) {
+                document.getElementById('detail-title').textContent = poem.title;
+                document.getElementById('detail-author').textContent = poem.author;
+                document.getElementById('detail-dynasty').textContent = `${poem.dynasty}${poem.category ? ' · ' + poem.category : ''}`;
+                document.getElementById('detail-content').textContent = poem.content;
+                
+                // 显示标签
+                const tagsContainer = document.getElementById('detail-tags');
+                tagsContainer.innerHTML = '';
+                
+                if (poem.tags && poem.tags.length > 0) {
+                    poem.tags.forEach(tag => {
+                        const tagEl = document.createElement('span');
+                        tagEl.className = 'poem-tag';
+                        tagEl.textContent = tag;
+                        tagsContainer.appendChild(tagEl);
+                    });
+                } else {
+                    tagsContainer.innerHTML = '<span class="poem-tag">无标签</span>';
+                }
+                
+                // 显示弹窗
+                poemDetailContainer.style.display = 'flex';
+            }
+            
+            // 加载朝代选项
+            function loadDynasties() {
+                fetch(`${API_BASE_URL}/dynasties`)
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.success) {
+                            populateSelect(dynastyFilter, data.data);
+                        }
+                    })
+                    .catch(err => console.error('加载朝代失败:', err));
+            }
+            
+            // 加载类别选项
+            function loadCategories() {
+                fetch(`${API_BASE_URL}/categories`)
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.success) {
+                            populateSelect(categoryFilter, data.data);
+                        }
+                    })
+                    .catch(err => console.error('加载类别失败:', err));
+            }
+            
+            // 填充下拉选项
+            function populateSelect(selectElement, options) {
+                options.forEach(option => {
+                    const optionEl = document.createElement('option');
+                    optionEl.value = option;
+                    optionEl.textContent = option;
+                    selectElement.appendChild(optionEl);
+                });
+            }
+            
+            // 事件监听器
+            document.addEventListener('DOMContentLoaded', () => {
+                // 初始加载
+                loadPoems();
+                loadDynasties();
+                loadCategories();
+                checkLoginStatus();
+                
+                // 搜索按钮点击事件
+                searchBtn.addEventListener('click', () => {
+                    currentPage = 1;
+                    loadPoems();
+                });
+                
+                // 关闭详情弹窗
+                closeDetail.addEventListener('click', () => {
+                    poemDetailContainer.style.display = 'none';
+                });
+                
+                // 点击弹窗外部关闭
+                poemDetailContainer.addEventListener('click', (e) => {
+                    if (e.target === poemDetailContainer) {
+                        poemDetailContainer.style.display = 'none';
+                    }
+                });
+                
+                // 退出登录
+                document.getElementById('logout-link').addEventListener('click', (e) => {
+                    e.preventDefault();
+                    localStorage.removeItem('token');
+                    checkLoginStatus();
+                    alert('已成功退出登录');
+                });
+            });
+        })();
+    </script>
+</body>
+</html> 

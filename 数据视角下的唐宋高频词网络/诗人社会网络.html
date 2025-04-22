@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>诗人社会网络</title>
+    <script src="../js/echarts.js"></script>
+    <script src="../js/jquery.min.js"></script>
+    <!-- <script src="../json/webkit-dep.json"></script> -->
+    <link rel="stylesheet" href="../css/诗人社会网络.css">
+</head>
+
+<body>
+    <!-- 新增导航栏 -->
+    <nav class="main-nav" style="position: fixed;right: 20px;top: 20px;z-index: 1001;">
+        <ul class="nav-list">
+            <li class="nav-item">
+                <a href="./主页面.html" class="nav-link">
+                    <span class="link-text">首页</span>
+                    <div class="link-border"></div>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="./唐宋研究.html" class="nav-link">
+                    <span class="link-text">高频词深度分析</span>
+                    <div class="link-border"></div>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="./诗词数据库.html" class="nav-link">
+                    <span class="link-text">诗词数据库</span>
+                    <div class="link-border"></div>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="./诗路探源.html" class="nav-link">
+                    <span class="link-text">诗路探源</span>
+                    <div class="link-border"></div>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div id="main" style="width: 90%;height:80%;"></div>
+    </div>
+    <!-- 新增文字云容器 -->
+    <div id="word-cloud" style="display: none;">
+        <!-- <a href="#" class="tag">初唐</a> -->
+        <a href="#" class="tag">明月</a>
+        <a href="#" class="tag">凤阙</a>
+        <a href="#" class="tag">龙旗</a>
+        <a href="#" class="tag">禅心</a>
+        <!-- <a href="#" class="tag">盛唐</a> -->
+        <a href="#" class="tag">大漠</a>
+        <a href="#" class="tag">胡天</a>
+        <a href="#" class="tag">金殿</a>
+        <a href="#" class="tag">琼筵</a>
+        <!-- <a href="#" class="tag">晚唐</a> -->
+        <a href="#" class="tag">残阳</a>
+        <a href="#" class="tag">寒鸦</a>
+        <a href="#" class="tag">枯荷</a>
+        <a href="#" class="tag">青冢</a>
+        <!-- <a href="#" class="tag">北宋</a> -->
+        <a href="#" class="tag">天理</a>
+        <a href="#" class="tag">格物</a>
+        <a href="#" class="tag">珠帘</a>
+        <a href="#" class="tag">画舫</a>
+        <!-- <a href="#" class="tag">南宋</a> -->
+        <a href="#" class="tag">铁马</a>
+        <a href="#" class="tag">冰河</a>
+        <a href="#" class="tag">连营</a>
+        <a href="#" class="tag">塞外声</a>
+    </div>
+    <!-- 新增侧边栏 -->
+    <div id="sidebar">
+        <div class="sidebar-header">
+            <h2 id="sidebar-title">诗信往来</h2>
+            <span class="close-btn" onclick="closeSidebar()">×</span>
+        </div>
+        <div id="letter-list"></div>
+    </div>
+    <button id="nebulaBtn"
+        style="position: fixed; bottom: 30px; right: 30px; z-index: 1000;padding: 12px 24px;background: linear-gradient(135deg, #4A00E0, #8E2DE2);color: white;border: none;border-radius: 25px;cursor: pointer;box-shadow: 0 4px 15px rgba(0,0,0,0.2);transition: transform 0.3s;">
+        开启星云幻境
+    </button>
+
+
+    <script>
+        // 侧边栏控制函数（提升到全局作用域）
+        function openSidebar(poetName) {
+            console.log('打开侧边栏：', poetName);
+            const sidebar = document.getElementById('sidebar');
+            const letterList = document.getElementById('letter-list');
+            const sidebarTitle = document.getElementById('sidebar-title');
+            sidebar.style.display = 'block';
+            setTimeout(() => {
+                sidebar.style.left = '0'; // 改为左侧滑入
+            }, 10);
+            // 设置标题
+            sidebarTitle.textContent = `${poetName}的诗信`;
+
+            // 清空旧数据
+            letterList.innerHTML = '';
+
+            // 获取当前诗人的信件
+            const letters = letterData[poetName] || [];
+
+            if (letters.length === 0) {
+                letterList.innerHTML = `<div class="letter-item">暂无${poetName}的诗信记录</div>`;
+            } else {
+                letters.forEach(letter => {
+                    const item = document.createElement('div');
+                    item.className = 'letter-item';
+                    item.innerHTML = `
+                        <div class="letter-header" style="margin-bottom:8px;">
+                            <span style="color:#2F4F4F;font-weight:bold;">致 ${letter.to}</span>
+                        </div>
+                        <div class="letter-title" style="color:#666;font-size:16px;">《${letter.title}》</div>
+                        <div class="letter-content" style="margin-top:12px;color:#888;font-style:italic;">
+                            ${letter.content}
+                        </div>
+                    `;
+                    letterList.appendChild(item);
+                });
+            }
+
+            sidebar.style.right = '0';
+        }
+
+        function closeSidebar() {
+            console.log('关闭侧边栏');
+            const sidebar = document.getElementById('sidebar');
+            sidebar.style.left = '-500px'; // 确保使用left属性
+            setTimeout(() => {
+                sidebar.style.display = 'none';
+            }, 300);
+        }
+
+        // 诗信数据改为全局变量
+        const letterData = {
+            "李白": [
+                {
+                    to: "杜甫",
+                    title: "沙丘城下寄杜甫",
+                    content: "我来竟何事？高卧沙丘城。城边有古树，日夕连秋声。鲁酒不可醉，齐歌空复情。思君若汶水，浩荡寄南征。",
+                    year: 745
+                },
+                {
+                    to: "王昌龄",
+                    title: "闻王昌龄左迁龙标遥有此寄",
+                    content: "杨花落尽子规啼，闻道龙标过五溪。我寄愁心与明月，随君直到夜郎西。",
+                    year: 753
+                },
+                {
+                    to: "孟浩然",
+                    title: "黄鹤楼送孟浩然之广陵",
+                    content: "故人西辞黄鹤楼，烟花三月下扬州。孤帆远影碧空尽，唯见长江天际流。",
+                    year: 730
+                },
+                {
+                    to: "汪伦",
+                    title: "赠汪伦",
+                    content: "李白乘舟将欲行，忽闻岸上踏歌声。桃花潭水深千尺，不及汪伦送我情。",
+                    year: 755
+                },
+                {
+                    to: "贺知章",
+                    title: "送贺宾客归越",
+                    content: "镜湖流水漾清波，狂客归舟逸兴多。山阴道士如相见，应写黄庭换白鹅。",
+                    year: 744
+                }
+            ],
+
+            // 杜甫关系网（含中唐时期）
+            "杜甫": [
+                {
+                    to: "李白",
+                    title: "春日忆李白",
+                    content: "白也诗无敌，飘然思不群。清新庾开府，俊逸鲍参军。渭北春天树，江东日暮云。何时一樽酒，重与细论文。",
+                    year: 746
+                },
+                {
+                    to: "高适",
+                    title: "寄高适",
+                    content: "楚隔乾坤远，难招病客魂。诗名惟我共，世事与谁论。北阙更新主，南星落故园。定知相见日，烂漫倒芳尊。",
+                    year: 761
+                },
+                {
+                    to: "严武",
+                    title: "奉济驿重送严公四韵",
+                    content: "远送从此别，青山空复情。几时杯重把，昨夜月同行。列郡讴歌惜，三朝出入荣。江村独归处，寂寞养残生。",
+                    year: 762
+                }
+            ],
+
+            // 王维关系网
+            "王维": [
+                {
+                    to: "裴迪",
+                    title: "山中与裴秀才迪书",
+                    content: "近腊月下，景气和畅，故山殊可过。足下方温经，猥不敢相烦，辄便往山中......",
+                    year: 758
+                },
+                {
+                    to: "孟浩然",
+                    title: "送孟六归襄阳",
+                    content: "杜门不复出，久与世情疏。以此为良策，劝君归旧庐。醉歌田舍酒，笑读古人书。好是一生事，无劳献子虚。",
+                    year: 728
+                },
+                {
+                    to: "李白",
+                    title: "梦李白二首",
+                    content: "死别已吞声，生别常恻恻。江南瘴疠地，逐客无消息。故人入我梦，明我长相忆。恐非平生魂，路远不可测。",
+                    year: 757
+                },
+                {
+                    to: "郑虔",
+                    title: "有怀台州郑司户",
+                    content: "天台隔三江，风浪无晨暮。郑公纵得归，老病不识路。昔如水上鸥，今为罝中兔。性命由他人，悲辛但狂顾。山鬼独一脚，蝮蛇长如树。呼号傍孤城，岁月谁与度。从来御魑魅，多为才名误。夫子嵇阮流，更被时俗恶。海隅微小吏，眼暗发垂素。黄帽映青袍，非供折腰具。平生一杯酒，见我故人遇。相望无所成，乾坤莽回互。",
+                    year: 757
+                },
+                {
+                    to: "高适",
+                    title: "寄彭州高三十五使君适虢州岑二十七长史三十韵",
+                    content: "故人何寂寞，今我独凄凉。老去才难尽，秋来兴甚长。物情尤可见，辞客未能忘。海内知名士，云端各异方。高岑殊缓步，沈鲍得同行。意惬关飞动，篇终接混茫。举天悲富骆，近代惜卢王。似尔官仍贵，前贤命可伤。诸侯非弃掷，半刺已翱翔。诗好几时见，书成无信将。",
+                    year: 759
+                },
+                {
+                    to: "崔十六",
+                    title: "毒热寄简崔评事十六弟",
+                    content: "大暑运金气，荆扬不知秋。林下有塌翼，水中无行舟。千室但扫地，闭关人事休。老夫转不乐，旅次兼百忧。蝮蛇暮偃蹇，空床难暗投。炎宵恶明烛，况乃怀旧丘。开襟仰内弟，执热露白头。束带负芒刺，接居成阻修。......",
+                    year: 766
+                }
+            ],
+
+            // 岑参边塞诗派
+            "岑参": [
+                {
+                    to: "封常清",
+                    title: "走马川行奉送封大夫出师西征",
+                    content: "君不见走马川行雪海边，平沙莽莽黄入天。轮台九月风夜吼，一川碎石大如斗......",
+                    year: 754
+                },
+                {
+                    to: "杜甫",
+                    title: "寄左省杜拾遗",
+                    content: "联步趋丹陛，分曹限紫微。晓随天仗入，暮惹御香归。白发悲花落，青云羡鸟飞。圣朝无阙事，自觉谏书稀。",
+                    year: 758
+                }
+            ],
+
+            // 苏轼文人圈
+            "苏轼": [
+                {
+                    to: "黄庭坚",
+                    title: "答黄鲁直书",
+                    content: "轼顿首再拜鲁直教授长官足下。轼始见足下诗文于孙莘老之坐上......",
+                    year: 1086
+                },
+                {
+                    to: "秦观",
+                    title: "太虚以黄楼赋见寄作诗为谢",
+                    content: "我在黄楼上，欲作黄楼诗。忽得故人书，中有黄楼词。黄楼高十丈，下建五丈旗......",
+                    year: 1078
+                }
+            ],
+            "高适": [
+                {
+                    to: "黄庭坚",
+                    title: "答黄鲁直书",
+                    content: "轼顿首再拜鲁直教授长官足下。轼始见足下诗文于孙莘老之坐上......",
+                    year: 1086
+                },
+                {
+                    to: "秦观",
+                    title: "太虚以黄楼赋见寄作诗为谢",
+                    content: "我在黄楼上，欲作黄楼诗。忽得故人书，中有黄楼词。黄楼高十丈，下建五丈旗......",
+                    year: 1078
+                }
+            ],
+            "孟浩然": [
+                {
+                    to: "黄庭坚",
+                    title: "答黄鲁直书",
+                    content: "轼顿首再拜鲁直教授长官足下。轼始见足下诗文于孙莘老之坐上......",
+                    year: 1086
+                },
+                {
+                    to: "秦观",
+                    title: "太虚以黄楼赋见寄作诗为谢",
+                    content: "我在黄楼上，欲作黄楼诗。忽得故人书，中有黄楼词。黄楼高十丈，下建五丈旗......",
+                    year: 1078
+                }
+            ],
+
+
+            // 李清照关系网
+            "李清照": [
+                {
+                    to: "赵明诚",
+                    title: "醉花阴·薄雾浓云愁永昼",
+                    content: "薄雾浓云愁永昼，瑞脑销金兽。佳节又重阳，玉枕纱厨，半夜凉初透......",
+                    year: 1121
+                },
+                {
+                    to: "晁补之",
+                    title: "新荷叶·薄露初零",
+                    content: "薄露初零，长宵共、永昼分停。绕水楼台，高耸万丈蓬瀛。芝兰为寿，相辉映、簪笏盈庭。花柔玉净，捧觞别有娉婷。鹤瘦松青，精神与、秋月争明。德行文章，素驰日下声名。东山高蹈，虽卿相、不足为荣。安石须起，要苏天下苍生。",
+                    year: 1108
+                },
+                {
+                    to: "张耒",
+                    title: "浯溪中兴颂诗和张文潜",
+                    content: "五十年功如电扫，华清花柳咸阳草。五坊供奉斗鸡儿，酒肉堆中不知老......",
+                    year: 1116
+                }
+            ]
+        };
+        // 数据验证函数（确保节点名称匹配）
+        function validatePoetData(nodes) {
+            const missingPoets = Object.keys(letterData).filter(name =>
+                !nodes.some(node => node.name === name)
+            );
+            if (missingPoets.length > 0) {
+                console.warn('未匹配的诗人数据：', missingPoets);
+            }
+        }
+
+        // 事件监听移动到图表初始化完成后
+
+    </script>
+
+    </script>
+    <script>
+        var ROOT_PATH = 'https://echarts.apache.org/examples';
+
+        var chartDom = document.getElementById('main');
+        var myChart = echarts.init(chartDom);
+        var originalData;
+        var option;
+        var hoverTimer = null;
+
+        // 诗人社会网络数据
+        const poetryNetworkData = {
+            "nodes": [
+                { "name": "中国诗词体系", "value": 15, "category": 0 },
+                { "name": "唐朝", "value": 12, "category": 1 },
+                { "name": "宋朝", "value": 10, "category": 1 },
+                { "name": "初唐", "value": 8, "category": 2 },
+                { "name": "盛唐", "value": 15, "category": 2 },
+                { "name": "中唐", "value": 7, "category": 2 },
+                { "name": "晚唐", "value": 6, "category": 2 },
+                { "name": "北宋", "value": 9, "category": 2 },
+                { "name": "南宋", "value": 8, "category": 2 },
+                { "name": "王勃", "value": 6, "category": 3 },
+                { "name": "杨炯", "value": 5, "category": 3 },
+                { "name": "卢照邻", "value": 5, "category": 3 },
+                { "name": "骆宾王", "value": 6, "category": 3 },
+                { "name": "贺知章", "value": 7, "category": 4 },
+                { "name": "陈子昂", "value": 7, "category": 3 },
+                { "name": "李白", "value": 20, "category": 4, "symbolSize": 25 },
+                { "name": "杜甫", "value": 18, "category": 4 },
+                { "name": "孟浩然", "value": 12, "category": 4 },
+                { "name": "王维", "value": 12, "category": 3 },
+                { "name": "高适", "value": 10, "category": 4 },
+                { "name": "岑参", "value": 10, "category": 4 },
+                { "name": "王昌龄", "value": 12, "category": 4 },
+                { "name": "元丹丘", "value": 8, "category": 4 },
+                { "name": "汪伦", "value": 8, "category": 4 },
+                { "name": "韩愈", "value": 9, "category": 3 },
+                { "name": "白居易", "value": 10, "category": 3 },
+                { "name": "李商隐", "value": 8, "category": 3 },
+                { "name": "杜牧", "value": 8, "category": 3 },
+                { "name": "苏轼", "value": 12, "category": 3 },
+                { "name": "黄庭坚", "value": 9, "category": 3 },
+                { "name": "王安石", "value": 8, "category": 3 },
+                { "name": "欧阳修", "value": 9, "category": 3 },
+                { "name": "李清照", "value": 9, "category": 3 }
+            ],
+            "links": [
+                { "source": 0, "target": 1 },
+                { "source": 0, "target": 2 },
+                { "source": 1, "target": 3 },
+                { "source": 1, "target": 4 },
+                { "source": 1, "target": 5 },
+                { "source": 1, "target": 6 },
+                { "source": 2, "target": 7 },
+                { "source": 2, "target": 8 },
+                { "source": 3, "target": 9 },
+                { "source": 3, "target": 10 },
+                { "source": 3, "target": 11 },
+                { "source": 3, "target": 12 },
+                { "source": 4, "target": 15 },
+                { "source": 4, "target": 16 },
+                { "source": 4, "target": 17 },
+                { "source": 4, "target": 18 },
+                { "source": 4, "target": 19 },
+                { "source": 4, "target": 20 },
+                { "source": 4, "target": 21 },
+                { "source": 5, "target": 24 },
+                { "source": 5, "target": 25 },
+                { "source": 6, "target": 26 },
+                { "source": 6, "target": 27 },
+                { "source": 7, "target": 28 },
+                { "source": 7, "target": 29 },
+                { "source": 7, "target": 30 },
+                { "source": 7, "target": 31 },
+                { "source": 8, "target": 32 },
+                { "source": 15, "target": 16 },
+                { "source": 15, "target": 17 },
+                { "source": 15, "target": 18 },
+                { "source": 15, "target": 21 },
+                { "source": 15, "target": 22 },
+                { "source": 15, "target": 23 },
+                { "source": 15, "target": 13 },
+                { "source": 16, "target": 19 },
+                { "source": 16, "target": 20 },
+                { "source": 16, "target": 24 },
+                { "source": 18, "target": 17 },
+                { "source": 28, "target": 29 },
+                { "source": 28, "target": 31 },
+                { "source": 28, "target": 32 }
+            ],
+            "categories": [
+                { "name": "中国诗词" },
+                { "name": "朝代" },
+                { "name": "诗歌流派" },
+                { "name": "初唐诗人" },
+                { "name": "盛唐诗人" },
+                { "name": "中唐诗人" },
+                { "name": "晚唐诗人" },
+                { "name": "北宋诗人" },
+                { "name": "南宋诗人" }
+            ]
+        };
+
+        // 显示加载动画
+        myChart.showLoading();
+        
+        // 初始化节点ID
+        poetryNetworkData.nodes.forEach((node, idx) => {
+            node.id = idx;
+        });
+        
+        // 保存原始数据
+        originalData = poetryNetworkData;
+        
+        // 预处理每个节点的邻居和链接
+        var nodeNeighbors = {};
+        poetryNetworkData.links.forEach((link, index) => {
+            const source = link.source;
+            const target = link.target;
+
+            if (!nodeNeighbors[source]) {
+                nodeNeighbors[source] = { nodes: new Set(), links: new Set() };
+            }
+            nodeNeighbors[source].nodes.add(target);
+            nodeNeighbors[source].links.add(index);
+
+            if (!nodeNeighbors[target]) {
+                nodeNeighbors[target] = { nodes: new Set(), links: new Set() };
+            }
+            nodeNeighbors[target].nodes.add(source);
+            nodeNeighbors[target].links.add(index);
+        });
+
+        // 隐藏加载动画
+        myChart.hideLoading();
+        
+        // 初始化图表配置
+        option = {
+            legend: [{
+                data: poetryNetworkData.categories.map(a => a.name),
+                selected: {
+                    '中国诗词': true,
+                    '朝代': true,
+                    '诗歌流派': true,
+                    '初唐诗人': true,
+                    '盛唐诗人': true,
+                    '中唐诗人': true,
+                    '晚唐诗人': true,
+                    '北宋诗人': true,
+                    '南宋诗人': true
+                }
+            }],
+            tooltip: {},
+            series: [{
+                type: 'graph',
+                layout: 'force',
+                animation: true,
+                label: {
+                    show: true,
+                    position: 'right',
+                    formatter: '{b}'
+                },
+                draggable: true,
+                data: poetryNetworkData.nodes,
+                categories: poetryNetworkData.categories,
+                force: {
+                    edgeLength: 120,
+                    repulsion: 2000,
+                    gravity: 0.2
+                },
+                edges: poetryNetworkData.links.map(link => ({
+                    ...link,
+                    lineStyle: {
+                        color: 'rgb(88, 88, 88)'
+                    }
+                }))
+            }]
+        };
+
+        // 应用配置
+        myChart.setOption(option);
+
+        // 鼠标悬停高亮关联节点
+        myChart.on('mouseover', { seriesIndex: 0 }, function (params) {
+            // 清除已有计时器
+            if (hoverTimer) {
+                clearTimeout(hoverTimer);
+                hoverTimer = null;
+            }
+
+            // 设置延迟计时器
+            hoverTimer = setTimeout(function () {
+                const currentNodeId = params.dataIndex;
+                const neighbors = nodeNeighbors[currentNodeId] || { nodes: new Set(), links: new Set() };
+                const relatedNodeIds = Array.from(neighbors.nodes).concat(currentNodeId);
+                const relatedLinkIndices = Array.from(neighbors.links);
+
+                const nodes = poetryNetworkData.nodes.map((node, idx) => ({
+                    ...node,
+                    itemStyle: {
+                        opacity: relatedNodeIds.includes(idx) ? 1 : 0.2
+                    }
+                }));
+
+                const links = poetryNetworkData.links.map((link, idx) => ({
+                    ...link,
+                    lineStyle: {
+                        opacity: relatedLinkIndices.includes(idx) ? 1 : 0.2,
+                        color: 'rgb(88, 88, 88)'
+                    }
+                }));
+
+                myChart.setOption({
+                    series: [{
+                        data: nodes,
+                        edges: links
+                    }]
+                });
+            }, 500);
+        });
+
+        // 鼠标移出重置透明度
+        myChart.on('mouseout', { seriesIndex: 0 }, function () {
+            if (hoverTimer) {
+                clearTimeout(hoverTimer);
+                hoverTimer = null;
+            }
+
+            const nodes = poetryNetworkData.nodes.map(node => ({
+                ...node,
+                itemStyle: {
+                    opacity: 1
+                }
+            }));
+
+            const links = poetryNetworkData.links.map(link => ({
+                ...link,
+                lineStyle: {
+                    opacity: 1,
+                    color: 'rgb(88, 88, 88)'
+                }
+            }));
+
+            myChart.setOption({
+                series: [{
+                    data: nodes,
+                    edges: links
+                }]
+            });
+        });
+
+        // 图例点击事件监听
+        myChart.on('legendselectchanged', function (params) {
+            var selectedCates = Object.keys(params.selected).filter(k => params.selected[k]);
+
+            // 过滤节点
+            var filteredNodes = originalData.nodes.filter(node =>
+                selectedCates.includes(originalData.categories[node.category].name)
+            );
+
+            // 过滤边（基于节点ID）
+            var validIds = new Set(filteredNodes.map(n => n.id));
+            var filteredLinks = originalData.links.filter(link =>
+                validIds.has(link.source) && validIds.has(link.target)
+            );
+
+            // 更新图表
+            myChart.setOption({
+                series: [{
+                    data: filteredNodes,
+                    edges: filteredLinks
+                }]
+            });
+        });
+
+        // 点击节点事件（打开侧边栏）
+        myChart.on('click', { seriesIndex: 0 }, function (params) {
+            console.log('点击节点:', params.name);
+            openSidebar(params.name);
+        });
+
+        // 全局点击事件（关闭侧边栏）
+        document.addEventListener('click', function (event) {
+            const sidebar = document.getElementById('sidebar');
+            const isClickOnChart = event.target.closest('#main');
+            const isClickOnNav = event.target.closest('.main-nav');
+            const isClickOnSidebar = event.target.closest('#sidebar');
+
+            if (!isClickOnChart && !isClickOnNav && !isClickOnSidebar) {
+                closeSidebar();
+            }
+        });
+    </script>
+
+    <script>
+      // 星云粒子系统配置
+      const nebulaOptions = {
+        backgroundColor: 'transparent', // 改为透明背景
+        series: [{
+            type: 'graph',
+            layout: 'force',
+
+            force: {
+                repulsion: 300,
+                gravity: 0.05,
+                edgeLength: 100,
+                friction: 0.3,
+                layoutAnimation: true
+            },
+            itemStyle: {
+                color: {
+                    type: 'radial',
+                    x: 0.5,
+                    y: 0.5,
+                    r: 0.8,
+                    colorStops: [{
+                        offset: 0, color: '#FFD700'
+                    }, {
+                        offset: 0.2, color: '#FF8C00'
+                    }, {
+                        offset: 1, color: '#4B0082'
+                    }]
+                },
+                opacity: 0.8,
+                shadowBlur: 20,
+                shadowColor: '#7B68EE'
+            },
+            lineStyle: {
+                color: 'rgba(123,104,238,0.5)',
+                curveness: 0.3,
+                width: 2,
+                shadowBlur: 10,
+                shadowColor: '#9370DB'
+            },
+            emphasis: {
+                itemStyle: {
+                    shadowBlur: 30,
+                    shadowColor: '#FFF'
+                }
+            },
+            nodes: [],
+            links: []
+        }]
+    };
+
+    // 星空背景粒子
+    function createStarfield() {
+        const canvas = document.createElement('canvas');
+        canvas.id = 'starfield-canvas'; // 添加唯一标识
+        const ctx = canvas.getContext('2d');
+        canvas.style.position = 'fixed';
+        canvas.style.top = '0';
+        canvas.style.left = '0';
+        canvas.style.zIndex = '-1';
+        document.body.appendChild(canvas);
+
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        const stars = Array.from({ length: 300 }, () => ({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            r: Math.random() * 1.5,
+            a: Math.random() * 0.8 + 0.2
+        }));
+
+        function animate() {
+            ctx.fillStyle = '#0A0E24';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            stars.forEach(star => {
+                ctx.beginPath();
+                ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(255,255,255,${star.a})`;
+                ctx.fill();
+
+                star.x += Math.sin(Date.now() * 0.001 + star.y * 0.01) * 0.3;
+                star.y += Math.cos(Date.now() * 0.001 + star.x * 0.01) * 0.3;
+
+                if (star.x > canvas.width) star.x = 0;
+                if (star.x < 0) star.x = canvas.width;
+                if (star.y > canvas.height) star.y = 0;
+                if (star.y < 0) star.y = canvas.height;
+            });
+
+            requestAnimationFrame(animate);
+        }
+        animate();
+    }
+
+    // 按钮点击事件
+    let isNebulaActive = false;
+    let wordCloudSystem = null;
+    document.getElementById('nebulaBtn').addEventListener('click', function () {
+        isNebulaActive = !isNebulaActive;
+
+        if (isNebulaActive) {
+            // 显示并初始化文字云
+            document.getElementById('word-cloud').style.display = 'block';
+            initializeWordCloud();
+            // 保存原始配置
+            originalOption = myChart.getOption();
+            this.textContent = '关闭星云幻境';
+            myChart.setOption(nebulaOptions, true);
+            createStarfield();
+        } else {
+            // 隐藏文字云
+            document.getElementById('word-cloud').style.display = 'none';
+            if (wordCloudSystem) wordCloudSystem.destroy();
+            this.textContent = '开启星云幻境';
+            // 恢复原始配置
+            myChart.setOption(originalOption, true);
+            // 准确移除星空背景
+            const starCanvas = document.getElementById('starfield-canvas');
+            if (starCanvas) starCanvas.remove();
+        }
+    });
+    // 文字云初始化函数
+    function initializeWordCloud() {
+        const R = 300; // 球体半径
+        const _focalLength = R * 1.2;
+        let angleX = 0, angleY = 0;
+
+        const tags = document.querySelectorAll('#word-cloud .tag');
+        const colorPalette = [
+            '#FF6B6B', // 初唐色
+            '#4ECDC4', // 盛唐色
+            '#45B7D1', // 晚唐色
+            '#96CEB4', // 北宋色
+            '#FFEEAD'  // 南宋色
+        ];
+        const cloudContainer = document.getElementById('word-cloud');
+        // 按每4个为一组设置颜色
+        tags.forEach((tag, index) => {
+            const colorIndex = Math.floor(index / 4) % colorPalette.length;
+            tag.style.color = colorPalette[colorIndex];
+            tag.style.fontSize = `${14 + (index % 4) * 2}px`; // 增加大小变化
+            tag.style.fontWeight = index % 2 === 0 ? 'normal' : 'bold'; // 增加字体变化
+        });
+        // 初始化位置
+        tags.forEach((tag, i) => {
+            const phi = Math.acos(-1 + (2 * i) / tags.length);
+            const theta = Math.sqrt(tags.length * Math.PI) * phi;
+
+            tag.x = R * Math.cos(theta) * Math.sin(phi);
+            tag.y = R * Math.sin(theta) * Math.sin(phi);
+            tag.z = R * Math.cos(phi);
+
+            // 设置随机颜色
+            tag.style.color = `hsl(${Math.random() * 360}, 70%, 60%)`;
+        });
+
+        // 动画循环
+        function animate() {
+            tags.forEach(tag => {
+                // 旋转计算
+                const x = tag.x * Math.cos(angleY) - tag.z * Math.sin(angleY);
+                const z = tag.z * Math.cos(angleY) + tag.x * Math.sin(angleY);
+                const y = tag.y * Math.cos(angleX) - z * Math.sin(angleX);
+
+                // 透视投影
+                const scale = _focalLength / (_focalLength - z);
+                tag.style.transform = `translate(${x}px, ${y}px) scale(${scale})`;
+                tag.style.opacity = (z + R) / (2 * R) + 0.3;
+            });
+
+            angleX += 0.002;
+            angleY += 0.003;
+            requestAnimationFrame(animate);
+        }
+
+        // 鼠标交互
+        cloudContainer.style.pointerEvents = 'auto';
+        cloudContainer.addEventListener('mousemove', (e) => {
+            angleY += (e.movementX * 0.0005);
+            angleX -= (e.movementY * 0.0005);
+        });
+
+        // 启动动画
+        animate();
+    }
+
+    // 修改原有图表配置的backgroundColor
+    option.backgroundColor = '#fff'; // 初始背景色
+    </script>
+</body>
+
+</html>

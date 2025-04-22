@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/index.css">
+    <script src="../js/主页面.js"></script>
+    <title>数据视角下的唐诗宋词高频探索</title>
+</head>
+
+<body>
+    <!-- 导航触发按钮 -->
+    <button class="nav-toggle" id="navToggle">☰</button>
+    
+    <!-- 用户头像和登录状态 -->
+    <div class="user-avatar-container">
+        <div class="user-avatar" id="userAvatar">
+            <img src="../img/touxiang1.jpg" alt="用户头像" id="avatarImg">
+            <div class="dropdown-menu" id="userMenu">
+                <span id="usernameDisplay"></span>
+                <a href="./登录.html" id="loginLink">登录/注册</a>
+                <a href="#" id="logoutBtn" style="display: none;">退出登录</a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 左侧导航 -->
+    <nav class="anchor-nav" id="sideNav">
+        <a href="#high-frequency" class="nav-button">诗路探源</a>
+        <a href="#poet-network" class="nav-button">高频词解析</a>
+        <a href="#spatiotemporal-analysis" class="nav-button">诗人社会网络</a>
+        <a href="#appreciation" class="nav-button">诗词数据库</a>
+    </nav>
+    <div class="container">
+        <section id="img-one" class="img">
+            <!-- 图片内导航 -->
+            <nav class="image-nav">
+                <a href="./诗路探源.html">诗路探源</a>
+                <a href="./唐宋研究.html">高频词解析</a>
+                <a href="./诗人社会网络.html">诗人社会网络</a>
+                <a href="./诗词数据库.html">诗词数据库</a>
+            </nav>
+            <p>数据视角下的唐诗宋词高频探索</p>
+        </section>
+        <section class="content-one" id="high-frequency">
+            <div class="text-box">
+                <div class="cnt">
+                    <h2>诗路探源：数据凝视下的唐诗宋词</h2>
+                    <p>
+                        我们熟读李白的"床前明月光"，却未必察觉唐代诗人对"月"字的偏爱是宋人的1.3倍；我们背诵苏轼的"大江东去"，却看不见他词中的江水串联起半个北宋文人圈。
+                    </p>
+                    <p>
+                        <a href="./诗路探源.html" class="btn" target="_blank">诗路探源</a>
+                    </p>
+
+                </div>
+            </div>
+        </section>
+        <section class="content-two" id="poet-network">
+            <div class="text-box">
+                <div class="cnt">
+                    <h2>诗语密码：高频词背后的千年心事</h2>
+                    <p>
+                        "明月"升起1.7万次，"孤舟"摇晃8千回——这些被无数诗人反复书写的词语，藏着整个民族共同的心事。它们如何跨越千年，成为文化血脉的坐标？
+                    </p>
+                    <p class="btn-box">
+                        <a href="./唐宋研究.html" class="btn" target="_blank">高频词深度解析</a>
+                    </p>
+
+                </div>
+            </div>
+        </section>
+        <section class="content-three" id="spatiotemporal-analysis">
+            <div class="text-box">
+                <div class="cnt">
+                    <h2>诗人关系链：被诗句记录的文人往来</h2>
+                    <p>
+                        李白与杜甫的相遇，让诗句在长安酒肆碰撞出287次唱和；苏轼贬谪途中的笔墨，竟牵动半个宋朝文坛的悲喜。当数据解开尘封的文人关系链，那些被史书遗漏的深夜对酌、隔空相惜，终在诗句的暗码中浮现。
+                    </p>
+                    <p>
+                        <a href="./诗人社会网络.html" class="btn" target="_blank">诗人社会网络</a>
+                    </p>
+
+                </div>
+            </div>
+        </section>
+        <section class="content-four" id="appreciation">
+            <div class="text-box">
+                <div class="cnt">
+                    <h2>诗脉基因库：唐宋词频数字典藏工程</h2>
+                    <p>
+                        我们构建这座「诗词基因库」，用自然语言处理技术拆解了30万首唐诗宋词，为每个汉字标注朝代、作者、情感倾向等12维属性。
+                    <p>
+                        <a href="./诗词数据库.html" class="btn" target="_blank">诗词数据库</a>
+                    </p>
+                </div>
+            </div>
+        </section>
+        <!-- <section id="img-two" class="img"> -->
+
+        </section>
+        <section id="footer">
+            <div class="f-main">
+                <div class="f-title">
+                    <h2>联系我们</h2>
+                </div>
+                <div class="f-text">
+                    <p>有问题请联系电话：19565995372</p>
+                    <p>邮箱：mjy127890@qq.com</p>
+                    <p>作为学生团队，这是我们第一次尝试，我们的分析可能不够专业，期待听到您的改进建议</p>
+                </div>
+                <div class="f-foot">
+                    <ul>
+                        <li>本研究的词频数据参考搜韵诗词网站<a
+                                href="https://sou-yun.cn/QueryPoem.aspx">https://sou-yun.cn/QueryPoem.aspx</a>，特此致谢</li>
+                        <li>可视化工具基于Echarts库<a
+                                href="https://echarts.apache.org/examples/zh/index.html#chart-type-line">https://echarts.apache.org/examples/zh/index.html#chart-type-line</a>二次开发
+                        </li>
+                        <li>五分钟唐宋高频词分析小科普<a
+                                href="https://daily.zhihu.com/story/9697145">https://daily.zhihu.com/story/9697145</a>
+                        </li>
+                        <li>数据经过基础校验，建议结合专业研究参考使用</li>
+                        <li><a href="诗词浏览.html">诗词浏览</a></li>
+                    </ul>
+                </div>
+            </div>
+
+
+        </section>
+    </div>
+
+    <!-- 添加用户认证和导航脚本 -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 认证状态检查
+            checkAuthStatus();
+            
+            // 侧边导航切换
+            const navToggle = document.getElementById('navToggle');
+            const sideNav = document.getElementById('sideNav');
+            
+            navToggle.addEventListener('click', function() {
+                sideNav.classList.toggle('active');
+            });
+            
+            // 头像点击事件 - 显示/隐藏下拉菜单
+            const avatarImg = document.getElementById('avatarImg');
+            const userMenu = document.getElementById('userMenu');
+            
+            avatarImg.addEventListener('click', function(e) {
+                e.stopPropagation();
+                userMenu.classList.toggle('show');
+            });
+            
+            // 点击页面其他区域关闭下拉菜单
+            document.addEventListener('click', function() {
+                userMenu.classList.remove('show');
+            });
+            
+            // 登出按钮事件
+            const logoutBtn = document.getElementById('logoutBtn');
+            logoutBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                logout();
+            });
+        });
+        
+        // 检查用户登录状态
+        function checkAuthStatus() {
+            const token = localStorage.getItem('token');
+            const loginLink = document.getElementById('loginLink');
+            const logoutBtn = document.getElementById('logoutBtn');
+            const usernameDisplay = document.getElementById('usernameDisplay');
+            
+            if (token) {
+                // 用户已登录
+                const userData = JSON.parse(localStorage.getItem('user'));
+                if (userData && userData.username) {
+                    usernameDisplay.textContent = `欢迎您，${userData.username}`;
+                    loginLink.style.display = 'none';
+                    logoutBtn.style.display = 'block';
+                }
+            } else {
+                // 用户未登录
+                usernameDisplay.textContent = '';
+                loginLink.style.display = 'block';
+                logoutBtn.style.display = 'none';
+            }
+        }
+        
+        // 退出登录
+        function logout() {
+            // 清除本地存储的认证信息
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+            
+            // 显示退出成功消息
+            alert('您已成功退出登录');
+            
+            // 更新UI状态
+            checkAuthStatus();
+            
+            // 关闭下拉菜单
+            document.getElementById('userMenu').classList.remove('show');
+        }
+    </script>
+</body>
+
+</html>
